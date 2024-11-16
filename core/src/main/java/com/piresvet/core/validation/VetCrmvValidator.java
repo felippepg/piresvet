@@ -1,5 +1,6 @@
 package com.piresvet.core.validation;
 
+
 import com.piresvet.core.exception.InvalidCrmvException;
 
 import java.util.regex.Pattern;
@@ -7,17 +8,16 @@ import java.util.regex.Pattern;
 public class VetCrmvValidator implements Validator {
     @Override
     public void validate(String crmv) {
-        String crmvPattern = "^[0-9]{1,5}/[A-Z]{2}$";
+        String crmvPattern = "^[0-9]{5,}/[A-Z]{2}$";
 
         if (crmv == null || crmv.isEmpty()) {
-            throw new IllegalArgumentException("CRMV não pode ser vazio");
+            throw new InvalidCrmvException("CRMV não pode ser vazio");
         }
 
         if (!Pattern.matches(crmvPattern, crmv)) {
             throw new InvalidCrmvException("Formato de CRMV inválido. Exemplo de formato correto: 12345/SP");
         }
 
-        // Separar o número do CRMV e a sigla do estado
         String[] parts = crmv.split("/");
         int numero = Integer.parseInt(parts[0]);
         String estado = parts[1];
@@ -27,7 +27,7 @@ public class VetCrmvValidator implements Validator {
         }
 
         if (!isValidState(estado)) {
-            throw new IllegalArgumentException("Sigla de estado inválida");
+            throw new InvalidCrmvException("Sigla de estado inválida");
         }
     }
 

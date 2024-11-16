@@ -11,20 +11,17 @@ public class Vet {
     private String firstname;
     private String lastname;
     private String crmv;
-    private Validator nameValidator;
-    private Validator vetCrmvValidator;
 
-    public Vet(String firstname, String lastname, String crmv, Validator nameValidator, Validator vetCrmvValidator) {
+    public Vet(String firstname, String lastname, String crmv) {
         this.id = UUID.randomUUID();
-        this.nameValidator = nameValidator;
-        this.vetCrmvValidator = vetCrmvValidator;
-        setFirstname(firstname);
-        setLastname(lastname);
-        setCrmv(crmv);
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.crmv = crmv;
     }
 
     public Vet() {
     }
+
 
     public UUID getId() {
         return id;
@@ -35,7 +32,6 @@ public class Vet {
     }
 
     public void setFirstname(String firstname) {
-        this.nameValidator.validate(firstname);
         this.firstname = firstname;
     }
 
@@ -44,7 +40,6 @@ public class Vet {
     }
 
     public void setLastname(String lastname) {
-        this.nameValidator.validate(lastname);
         this.lastname = lastname;
     }
 
@@ -53,7 +48,6 @@ public class Vet {
     }
 
     public void setCrmv(String crmv) {
-        this.vetCrmvValidator.validate(crmv);
         this.crmv = crmv;
     }
 
