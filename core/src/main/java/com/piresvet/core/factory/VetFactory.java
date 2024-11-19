@@ -4,8 +4,8 @@ import com.piresvet.core.domain.Vet;
 import com.piresvet.core.validation.Validator;
 
 public class VetFactory {
-    private final Validator nameValidator;
-    private final Validator vetCrmvValidator;
+    private Validator nameValidator;
+    private Validator vetCrmvValidator;
 
     public VetFactory(Validator nameValidator, Validator vetCrmvValidator) {
         this.nameValidator = nameValidator;

@@ -1,6 +1,6 @@
 package com.piresvet.core.validation;
 
-public class NameValidator implements Validator{
+public class NameValidator implements Validator {
     @Override
     public void validate(String name){
         if(name.isEmpty()) {
