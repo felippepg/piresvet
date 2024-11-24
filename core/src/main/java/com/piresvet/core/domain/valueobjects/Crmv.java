@@ -1,13 +1,12 @@
-package com.piresvet.core.validation;
-
+package com.piresvet.core.domain.valueobjects;
 
 import com.piresvet.core.exception.InvalidCrmvException;
 
 import java.util.regex.Pattern;
 
-public class VetCrmvValidator implements Validator {
-    @Override
-    public void validate(String crmv) {
+public class Crmv {
+    private String crmv;
+    public Crmv (String crmv) {
         String crmvPattern = "^[0-9]{5,}/[A-Z]{2}$";
 
         if (crmv == null || crmv.isEmpty()) {
@@ -29,6 +28,8 @@ public class VetCrmvValidator implements Validator {
         if (!isValidState(estado)) {
             throw new InvalidCrmvException("Sigla de estado inválida");
         }
+
+        this.crmv = crmv;
     }
 
     private static boolean isValidState(String estado) {
@@ -44,5 +45,9 @@ public class VetCrmvValidator implements Validator {
             }
         }
         return false;
+    }
+
+    public String getCrmv() {
+        return crmv;
     }
 }

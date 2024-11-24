@@ -1,18 +1,20 @@
 package com.piresvet.core.domain;
 
 
-import com.piresvet.core.validation.Validator;
+import com.piresvet.core.domain.valueobjects.Crmv;
+import com.piresvet.core.domain.valueobjects.Name;
+
 
 
 import java.util.UUID;
 
 public class Vet {
     private UUID id;
-    private String firstname;
-    private String lastname;
-    private String crmv;
+    private Name firstname;
+    private Name lastname;
+    private Crmv crmv;
 
-    public Vet(String firstname, String lastname, String crmv) {
+    public Vet(Name firstname, Name lastname, Crmv crmv) {
         this.id = UUID.randomUUID();
         this.firstname = firstname;
         this.lastname = lastname;
@@ -28,26 +30,26 @@ public class Vet {
     }
 
     public String getFirstname() {
-        return firstname;
+        return firstname.getName();
     }
 
-    public void setFirstname(String firstname) {
+    public void setFirstname(Name firstname) {
         this.firstname = firstname;
     }
 
     public String getLastname() {
-        return lastname;
+        return lastname.getName();
     }
 
-    public void setLastname(String lastname) {
+    public void setLastname(Name lastname) {
         this.lastname = lastname;
     }
 
     public String getCrmv() {
-        return crmv;
+        return crmv.getCrmv();
     }
 
-    public void setCrmv(String crmv) {
+    public void setCrmv(Crmv crmv) {
         this.crmv = crmv;
     }
 

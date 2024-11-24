@@ -1,15 +1,18 @@
 package com.piresvet.core.domain;
 
 
+import com.piresvet.core.domain.valueobjects.Cpf;
+import com.piresvet.core.domain.valueobjects.Name;
+
 import java.util.UUID;
 
 public class PetOwner {
     private UUID id;
-    private String firstname;
-    private String lastname;
-    private String cpf;
+    private Name firstname;
+    private Name lastname;
+    private Cpf cpf;
 
-    public PetOwner(String firstname, String lastname, String cpf) {
+    public PetOwner(Name firstname, Name lastname, Cpf cpf) {
         this.id = UUID.randomUUID();
         this.firstname = firstname;
         this.lastname = lastname;
@@ -24,26 +27,26 @@ public class PetOwner {
     }
 
     public String getFirstname() {
-        return firstname;
+        return firstname.getName();
     }
 
-    public void setFirstname(String firstname) {
+    public void setFirstname(Name firstname) {
         this.firstname = firstname;
     }
 
     public String getLastname() {
-        return lastname;
+        return lastname.getName();
     }
 
-    public void setLastname(String lastname) {
+    public void setLastname(Name lastname) {
         this.lastname = lastname;
     }
 
-    public String getCpf() {
+    public Cpf getCpf() {
         return cpf;
     }
 
-    public void setCpf(String crmv) {
+    public void setCpf(Cpf cpf) {
         this.cpf = cpf;
     }
 
