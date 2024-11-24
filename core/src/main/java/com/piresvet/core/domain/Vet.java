@@ -14,11 +14,14 @@ public class Vet {
     private Name lastname;
     private Crmv crmv;
 
+    private boolean available;
+
     public Vet(Name firstname, Name lastname, Crmv crmv) {
         this.id = UUID.randomUUID();
         this.firstname = firstname;
         this.lastname = lastname;
         this.crmv = crmv;
+        this.available = true;
     }
 
     public Vet() {
@@ -53,6 +56,11 @@ public class Vet {
         this.crmv = crmv;
     }
 
+    public boolean getAvailable() {
+        return available;
+    }
 
-
+    public void setAvailable(Boolean available) {
+        this.available = available;
+    }
 }

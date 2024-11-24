@@ -15,6 +15,15 @@ public class Pet {
     private PetOwner petOwner;
     private Species species;
     private Size size;
+    private boolean available;
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
 
     public Pet(String name, Integer age, LocalDate createdAt, LocalDate updatedAt, PetOwner petOwner, Species species, Size size) {
         this.id = UUID.randomUUID();
@@ -25,6 +34,7 @@ public class Pet {
         this.petOwner = petOwner;
         this.species = species;
         this.size = size;
+        this.available = true;
     }
 
     public UUID getId() {
@@ -87,4 +97,5 @@ public class Pet {
     public void setSize(Size size) {
         this.size = size;
     }
+
 }
