@@ -14,7 +14,7 @@ public class Vet {
     private Name lastname;
     private Crmv crmv;
 
-    private Boolean available;
+    private boolean available;
 
     public Vet(Name firstname, Name lastname, Crmv crmv) {
         this.id = UUID.randomUUID();
@@ -56,7 +56,7 @@ public class Vet {
         this.crmv = crmv;
     }
 
-    public Boolean getAvailable() {
+    public boolean getAvailable() {
         return available;
     }
 

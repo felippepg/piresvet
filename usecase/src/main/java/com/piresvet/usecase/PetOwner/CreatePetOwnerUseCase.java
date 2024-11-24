@@ -4,5 +4,5 @@ import com.piresvet.core.domain.PetOwner;
 import com.piresvet.core.domain.Vet;
 
 public interface CreatePetOwnerUseCase {
-    void create(PetOwner owner);
+    PetOwner create(PetOwner owner);
 }
