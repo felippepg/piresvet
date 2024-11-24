@@ -1,7 +1,7 @@
-package com.piresvet.usecaseimpl;
+package com.piresvet.usecaseimpl.Vet;
 
 import com.piresvet.core.domain.Vet;
-import com.piresvet.gateway.FindAvailableVetsGateway;
+import com.piresvet.gateway.Vet.FindAvailableVetsGateway;
 import com.piresvet.usecase.Vet.FindAvailableVetsUseCase;
 
 import java.util.List;

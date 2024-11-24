@@ -1,4 +1,4 @@
-package com.piresvet.gateway;
+package com.piresvet.gateway.Vet;
 
 import java.util.UUID;
 

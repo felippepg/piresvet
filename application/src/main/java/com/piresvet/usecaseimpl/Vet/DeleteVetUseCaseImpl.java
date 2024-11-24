@@ -1,8 +1,7 @@
-package com.piresvet.usecaseimpl;
+package com.piresvet.usecaseimpl.Vet;
 
-import com.piresvet.gateway.DeleteVetGateway;
+import com.piresvet.gateway.Vet.DeleteVetGateway;
 import com.piresvet.usecase.Vet.DeleteVetUseCase;
-import com.piresvet.usecase.Vet.FindVetByCrmvUseCase;
 import com.piresvet.usecase.Vet.FindVetByIdUseCase;
 
 import java.util.UUID;

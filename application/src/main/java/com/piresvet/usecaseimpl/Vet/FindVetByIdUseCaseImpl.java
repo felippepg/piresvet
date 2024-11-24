@@ -1,9 +1,7 @@
-package com.piresvet.usecaseimpl;
+package com.piresvet.usecaseimpl.Vet;
 
 import com.piresvet.core.domain.Vet;
-import com.piresvet.core.exception.InvalidCrmvException;
-import com.piresvet.gateway.FindVetByCrmvGateway;
-import com.piresvet.gateway.FindVetByIdGateway;
+import com.piresvet.gateway.Vet.FindVetByIdGateway;
 import com.piresvet.usecase.Vet.FindVetByIdUseCase;
 
 import java.util.NoSuchElementException;
