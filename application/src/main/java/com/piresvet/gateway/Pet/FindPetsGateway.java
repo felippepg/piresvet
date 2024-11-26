@@ -1,4 +1,4 @@
-package com.piresvet.gateway;
+package com.piresvet.gateway.Pet;
 
 import com.piresvet.core.domain.Pet;
 

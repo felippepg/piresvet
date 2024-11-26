@@ -1,9 +1,9 @@
 package com.piresvet.usecase.PetOwner;
 
-import com.piresvet.core.domain.Vet;
+import com.piresvet.core.domain.PetOwner;
 
 import java.util.UUID;
 
 public interface UpdatePetOwnerUseCase {
-    Vet update(UUID id);
+    PetOwner update(UUID id);
 }

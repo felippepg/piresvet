@@ -1,12 +1,11 @@
-package com.piresvet.usecaseimpl;
+package com.piresvet.usecaseimpl.Pet;
 
 import com.piresvet.core.domain.Pet;
-import com.piresvet.gateway.FindPetsGateway;
+import com.piresvet.gateway.Pet.FindPetsGateway;
 import com.piresvet.usecase.Pet.FindPetsUseCase;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.UUID;
 
 public class FindPetsUseCaseImpl implements FindPetsUseCase {
