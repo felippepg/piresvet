@@ -13,7 +13,7 @@ public class CreateVetUseCaseImpl implements CreateVetUseCase {
     }
 
     @Override
-    public void create(Vet vet) {
-        createVetGateway.create(vet);
+    public Vet create(Vet vet) {
+        return createVetGateway.create(vet);
     }
 }
