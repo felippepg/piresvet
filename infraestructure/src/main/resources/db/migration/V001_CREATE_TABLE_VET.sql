@@ -1,6 +1,0 @@
-CREATE TABLE Vet (
-    Id UUID NOT NULL PRIMARY KEY
-    firstname NOT NULL VARCHAR(100)
-    lastname NOT NULL VARCHAR(100)
-    crmv NOT NULL VARCHAR(8)
-);

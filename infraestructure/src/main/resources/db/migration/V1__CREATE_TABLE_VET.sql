@@ -1,0 +1,7 @@
+CREATE TABLE Vet (
+    Id CHAR(36) NOT NULL PRIMARY KEY,
+    firstname VARCHAR(100) NOT NULL,
+    lastname VARCHAR(100) NOT NULL ,
+    crmv VARCHAR(8) NOT NULL ,
+    available BOOLEAN NOT NULL
+);
