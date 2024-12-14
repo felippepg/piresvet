@@ -19,6 +19,13 @@ public class PetOwner {
         this.cpf = cpf;
     }
 
+    public PetOwner(UUID id, Name firstname, Name lastname, Cpf cpf) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.cpf = cpf;
+    }
+
     public PetOwner() {
     }
 

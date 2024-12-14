@@ -22,7 +22,7 @@ public class VetMapper {
     }
 
     public Vet toDomain(VetEntity entity) {
-        return factory.create(entity.getFirstname(), entity.getLastname(), entity.getCrmv());
+        return factory.create(entity.getId(), entity.getFirstname(), entity.getLastname(), entity.getCrmv());
     }
 
     public Vet toDomain(VetRequest request) {
