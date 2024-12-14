@@ -1,6 +1,7 @@
 package com.piresvet.useCaseImplementation.Vet;
 
 import com.piresvet.core.domain.Vet;
+import com.piresvet.core.exception.VetNotFoundException;
 import com.piresvet.gatewayContracts.Vet.FindVetGateway;
 import com.piresvet.useCaseContracts.Vet.FindVetUseCase;
 
@@ -18,7 +19,7 @@ public class FindVetUseCaseImpl implements FindVetUseCase {
     @Override
     public Vet findById(UUID id) {
         var optional = findVetGateway.findById(id);
-        return optional.orElseThrow(() -> new NoSuchElementException("Não foi possivel localizar o veteriario"));
+        return optional.orElseThrow(() -> new VetNotFoundException("Não foi possivel localizar o veteriario"));
     }
 
     @Override
@@ -29,7 +30,7 @@ public class FindVetUseCaseImpl implements FindVetUseCase {
     @Override
     public Vet findByCrm(String crmv) {
         var optional = findVetGateway.findByCrm(crmv);
-        return optional.orElseThrow(() -> new NoSuchElementException("Não foi possivel localizar o veterinario"));
+        return optional.orElseThrow(() -> new VetNotFoundException("Não foi possivel localizar o veterinario"));
     }
 
     @Override

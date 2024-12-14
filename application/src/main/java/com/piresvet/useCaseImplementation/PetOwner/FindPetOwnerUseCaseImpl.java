@@ -1,6 +1,7 @@
 package com.piresvet.useCaseImplementation.PetOwner;
 
 import com.piresvet.core.domain.PetOwner;
+import com.piresvet.core.exception.PetOwnerNotFoundException;
 import com.piresvet.gatewayContracts.PetOwner.FindPetOwnerGateway;
 import com.piresvet.useCaseContracts.PetOwner.FindPetOwnerUseCase;
 
@@ -18,7 +19,7 @@ public class FindPetOwnerUseCaseImpl implements FindPetOwnerUseCase {
     @Override
     public PetOwner findById(UUID id) {
         var optional = findPetOwnerGateway.findById(id);
-        return optional.orElseThrow(() -> new NoSuchElementException("Não foi possível localizar tutor"));
+        return optional.orElseThrow(() -> new PetOwnerNotFoundException("Não foi possível localizar tutor"));
     }
 
     @Override
@@ -29,7 +30,7 @@ public class FindPetOwnerUseCaseImpl implements FindPetOwnerUseCase {
     @Override
     public PetOwner findByCpf(String cpf) {
         var optional = findPetOwnerGateway.findByCpf(cpf);
-        return optional.orElseThrow(() -> new NoSuchElementException("Não foi possível localizar tutor"));
+        return optional.orElseThrow(() -> new PetOwnerNotFoundException("Não foi possível localizar tutor"));
     }
 
     @Override

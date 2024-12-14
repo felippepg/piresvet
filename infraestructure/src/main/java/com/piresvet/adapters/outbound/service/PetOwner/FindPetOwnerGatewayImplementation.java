@@ -1,6 +1,7 @@
 package com.piresvet.adapters.outbound.service.PetOwner;
 
 import com.piresvet.core.domain.PetOwner;
+import com.piresvet.core.exception.PetOwnerNotFoundException;
 import com.piresvet.dataMapper.PetOwnerMapper;
 import com.piresvet.gatewayContracts.PetOwner.FindPetOwnerGateway;
 import com.piresvet.persistence.PetOwnerRepository;
@@ -17,8 +18,8 @@ public class FindPetOwnerGatewayImplementation implements FindPetOwnerGateway {
     private final PetOwnerMapper mapper;
     @Override
     public Optional<PetOwner> findById(UUID id) {
-        var petOwner = repository.findById(id);
-        return Optional.ofNullable(mapper.toDomain(petOwner.get()));
+        var petOwner = repository.findById(id).orElseThrow(() -> new PetOwnerNotFoundException("Tutor não encontrado"));
+        return Optional.ofNullable(mapper.toDomain(petOwner));
     }
 
     @Override
