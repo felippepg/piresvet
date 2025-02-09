@@ -21,7 +21,6 @@ public class FindPetOwnerGatewayImplementation implements FindPetOwnerGateway {
     @Override
     public Optional<PetOwner> findById(UUID id) {
         var petOwner = repository.findById(id).orElseThrow(() -> new PetOwnerNotFoundException("Tutor não encontrado"));
-        System.out.println(petOwner.getFirstname());
         return Optional.ofNullable(mapper.toDomain(petOwner));
     }
 

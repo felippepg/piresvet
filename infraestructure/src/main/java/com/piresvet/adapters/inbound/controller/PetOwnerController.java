@@ -4,14 +4,15 @@ import com.piresvet.adapters.inbound.dtos.PetOwner.PetOwnerRequest;
 import com.piresvet.adapters.inbound.dtos.PetOwner.PetOwnerResponse;
 import com.piresvet.dataMapper.PetOwnerMapper;
 import com.piresvet.useCaseContracts.PetOwner.CreatePetOwnerUseCase;
+import com.piresvet.useCaseContracts.PetOwner.DeletePetOwnerUseCase;
 import com.piresvet.useCaseContracts.PetOwner.FindPetOwnerUseCase;
+import com.piresvet.useCaseContracts.PetOwner.UpdatePetOwnerUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,8 @@ import java.util.stream.Collectors;
 public class PetOwnerController {
     private final CreatePetOwnerUseCase createPetOwnerUseCase;
     private final FindPetOwnerUseCase findPetOwnerUseCase;
+    private final DeletePetOwnerUseCase deletePetOwnerUseCase;
+    private final UpdatePetOwnerUseCase updatePetOwnerUseCase;
     private final PetOwnerMapper mapper;
 
     @PostMapping("/create")
@@ -34,21 +37,6 @@ public class PetOwnerController {
         var petOwner = findPetOwnerUseCase.findById(id);
         return ResponseEntity.ok(mapper.toResponse(petOwner));
     }
-
-//    @GetMapping("/find-by-cpf/{cpf}")
-//    public ResponseEntity<PetOwnerResponse> findPetOwnerByCpf(@PathVariable("cpf") String cpf) {
-//        var petOwner = findPetOwnerUseCase.findByCpf(cpf);
-//        return ResponseEntity.ok(mapper.toResponse(petOwner));
-//    }
-
-//    @GetMapping("/find-by-fullName")
-//    public ResponseEntity<List<PetOwnerResponse>> findByFullName(
-//            @RequestParam(name = "firstname") String firstname,
-//            @RequestParam(name = "lastname") String lastname) {
-//
-//        var petOwners = findPetOwnerUseCase.findByFullname(firstname, lastname);
-//        return ResponseEntity.ok(petOwners.stream().map(mapper::toResponse).collect(Collectors.toList()));
-//    }
 
     @GetMapping("/find-all")
     public ResponseEntity<List<PetOwnerResponse>> getAllPetOwners() {
@@ -80,6 +68,18 @@ public class PetOwnerController {
         return ResponseEntity.badRequest().body("Informe pelo menos um parâmetro para a busca.");
     }
 
+    @PatchMapping("/update/{id}")
+    public ResponseEntity<PetOwnerResponse> updatePetOwner(@PathVariable("id") UUID id, @RequestBody PetOwnerRequest request) {
+        var newPetOwner = updatePetOwnerUseCase.update(id, mapper.toDomain(request));
+
+        return ResponseEntity.ok().body(mapper.toResponse(newPetOwner));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deletePetOwner(@PathVariable("id") UUID id) {
+        deletePetOwnerUseCase.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }

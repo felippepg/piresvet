@@ -18,16 +18,15 @@ public class UpdatePetOwnerGatewayImplementation implements UpdatePetOwnerGatewa
     @Override
     public PetOwner update(UUID id, PetOwner owner) {
         var actual = repository.findById(id).orElseThrow(() -> new PetOwnerNotFoundException("Tutor não encontrado"));
+
         if(owner.getFirstname() != null) {
             actual.setFirstname(owner.getFirstname());
         }
         if(owner.getLastname() != null) {
             actual.setLastname(owner.getLastname());
         }
-        if(owner.getCpf().getCpf() != null) {
-            actual.setCpf(owner.getCpf().getCpf());
-        }
         var newPetOwner = repository.save(actual);
         return mapper.toDomain(newPetOwner);
     }
+
 }

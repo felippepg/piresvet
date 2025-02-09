@@ -12,7 +12,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class DeletePetOwnerGatewayImplementation implements DeletePetOwnerGateway {
     private final PetOwnerRepository repository;
-    private final PetOwnerMapper mapper;
+
     @Override
     public void delete(UUID id) {
         var petOwner = repository.findById(id).orElseThrow(() -> new PetOwnerNotFoundException("Tutor não encontrado"));
