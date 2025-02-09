@@ -6,7 +6,6 @@ import com.piresvet.gatewayContracts.PetOwner.FindPetOwnerGateway;
 import com.piresvet.useCaseContracts.PetOwner.FindPetOwnerUseCase;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.UUID;
 
 public class FindPetOwnerUseCaseImpl implements FindPetOwnerUseCase {
@@ -36,5 +35,10 @@ public class FindPetOwnerUseCaseImpl implements FindPetOwnerUseCase {
     @Override
     public List<PetOwner> findAll() {
         return findPetOwnerGateway.findAll();
+    }
+
+    @Override
+    public List<PetOwner> findByName(String firstname) {
+        return findPetOwnerGateway.findByName(firstname);
     }
 }

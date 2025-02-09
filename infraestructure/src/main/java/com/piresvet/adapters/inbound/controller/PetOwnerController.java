@@ -10,7 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/pet-owner")
@@ -31,6 +34,52 @@ public class PetOwnerController {
         var petOwner = findPetOwnerUseCase.findById(id);
         return ResponseEntity.ok(mapper.toResponse(petOwner));
     }
+
+//    @GetMapping("/find-by-cpf/{cpf}")
+//    public ResponseEntity<PetOwnerResponse> findPetOwnerByCpf(@PathVariable("cpf") String cpf) {
+//        var petOwner = findPetOwnerUseCase.findByCpf(cpf);
+//        return ResponseEntity.ok(mapper.toResponse(petOwner));
+//    }
+
+//    @GetMapping("/find-by-fullName")
+//    public ResponseEntity<List<PetOwnerResponse>> findByFullName(
+//            @RequestParam(name = "firstname") String firstname,
+//            @RequestParam(name = "lastname") String lastname) {
+//
+//        var petOwners = findPetOwnerUseCase.findByFullname(firstname, lastname);
+//        return ResponseEntity.ok(petOwners.stream().map(mapper::toResponse).collect(Collectors.toList()));
+//    }
+
+    @GetMapping("/find-all")
+    public ResponseEntity<List<PetOwnerResponse>> getAllPetOwners() {
+        var petOwners = findPetOwnerUseCase.findAll();
+        return ResponseEntity.ok(petOwners.stream().map(mapper::toResponse).collect(Collectors.toList()));
+    }
+
+    @GetMapping("/find")
+    public ResponseEntity<?> findPetOwners(
+            @RequestParam(name = "cpf", required = false) String cpf,
+            @RequestParam(name = "firstname", required = false) String firstname,
+            @RequestParam(name = "lastname", required = false) String lastname) {
+
+        if(cpf != null) {
+            var petOwner = findPetOwnerUseCase.findByCpf(cpf);
+            return ResponseEntity.ok(mapper.toResponse(petOwner));
+        }
+
+        if(firstname != null && lastname == null) {
+            var petOwners = findPetOwnerUseCase.findByName(firstname);
+            return ResponseEntity.ok(petOwners.stream().map(mapper::toResponse).collect(Collectors.toList()));
+        }
+
+        if (firstname != null) {
+            var petOwners = findPetOwnerUseCase.findByFullname(firstname, lastname);
+            return ResponseEntity.ok(petOwners.stream().map(mapper::toResponse).collect(Collectors.toList()));
+        }
+
+        return ResponseEntity.badRequest().body("Informe pelo menos um parâmetro para a busca.");
+    }
+
 
 
 }

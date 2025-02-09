@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class FindPetOwnerGatewayImplementation implements FindPetOwnerGateway {
@@ -19,21 +21,35 @@ public class FindPetOwnerGatewayImplementation implements FindPetOwnerGateway {
     @Override
     public Optional<PetOwner> findById(UUID id) {
         var petOwner = repository.findById(id).orElseThrow(() -> new PetOwnerNotFoundException("Tutor não encontrado"));
+        System.out.println(petOwner.getFirstname());
         return Optional.ofNullable(mapper.toDomain(petOwner));
     }
 
     @Override
     public List<PetOwner> findByFullname(String firstname, String lastname) {
-        return null;
+        var petOwners = repository.findByFirstnameAndLastname(firstname, lastname);
+        return petOwners.stream().map(mapper::toDomain)
+                .collect(Collectors.toList());
     }
 
     @Override
     public Optional<PetOwner> findByCpf(String cpf) {
-        return Optional.empty();
+        var petOwner = repository.findByCpf(cpf).orElseThrow(() -> new PetOwnerNotFoundException("Tutor não encontrado"));
+        return Optional.ofNullable(mapper.toDomain(petOwner));
     }
 
     @Override
     public List<PetOwner> findAll() {
-        return null;
+        var petOwners = repository.findAll();
+        return petOwners.stream()
+                .map(mapper::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PetOwner> findByName(String firstname) {
+        var petOwners = repository.findByFirstname(firstname);
+        return petOwners.stream().map(mapper::toDomain)
+                .collect(Collectors.toList());
     }
 }

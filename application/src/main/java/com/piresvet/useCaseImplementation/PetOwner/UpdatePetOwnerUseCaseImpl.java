@@ -17,8 +17,8 @@ public class UpdatePetOwnerUseCaseImpl implements UpdatePetOwnerUseCase {
     }
 
     @Override
-    public PetOwner update(UUID id) {
+    public PetOwner update(UUID id, PetOwner petOwner) {
         findPetOwnerGateway.findById(id);
-        return updatePetOwnerGateway.update(id);
+        return updatePetOwnerGateway.update(id, petOwner);
     }
 }

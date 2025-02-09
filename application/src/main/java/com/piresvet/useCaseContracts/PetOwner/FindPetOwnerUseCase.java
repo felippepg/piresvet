@@ -10,5 +10,5 @@ public interface FindPetOwnerUseCase {
     List<PetOwner> findByFullname(String firstname, String lastname);
     PetOwner findByCpf(String cpf);
     List<PetOwner> findAll();
-
+    List<PetOwner> findByName(String firstname);
 }

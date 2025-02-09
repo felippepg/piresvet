@@ -11,5 +11,5 @@ public interface FindPetOwnerGateway {
     List<PetOwner> findByFullname(String firstname, String lastname);
     Optional<PetOwner> findByCpf(String cpf);
     List<PetOwner> findAll();
-
+    List<PetOwner> findByName(String firstname);
 }

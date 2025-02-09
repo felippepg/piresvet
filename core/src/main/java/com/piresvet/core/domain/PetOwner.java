@@ -4,6 +4,7 @@ package com.piresvet.core.domain;
 import com.piresvet.core.domain.valueobjects.Cpf;
 import com.piresvet.core.domain.valueobjects.Name;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class PetOwner {
@@ -57,6 +58,15 @@ public class PetOwner {
         this.cpf = cpf;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PetOwner petOwner)) return false;
+        return Objects.equals(cpf, petOwner.cpf);
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(cpf);
+    }
 }
