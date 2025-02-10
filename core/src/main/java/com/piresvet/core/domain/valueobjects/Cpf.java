@@ -1,5 +1,7 @@
 package com.piresvet.core.domain.valueobjects;
 
+import com.piresvet.core.exception.InvalidCpfException;
+
 import java.util.regex.Pattern;
 
 public class Cpf {
@@ -8,7 +10,7 @@ public class Cpf {
 
     public Cpf(String cpf) {
         if (cpf == null) throw new IllegalArgumentException("CPF não pode ser nulo!");
-        if (!CPF_PATTERN.matcher(cpf).matches()) throw new IllegalArgumentException("Formato do CPF inválido");
+        if (!CPF_PATTERN.matcher(cpf).matches()) throw new InvalidCpfException("Formato do CPF inválido");
 
         this.cpf = cpf;
     }

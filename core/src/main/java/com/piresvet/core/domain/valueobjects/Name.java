@@ -1,13 +1,15 @@
 package com.piresvet.core.domain.valueobjects;
 
+import com.piresvet.core.exception.InvalidUsernameException;
+
 public class Name {
     private final String name;
     public Name(String name) {
         if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome não pode ser vazio ou nulo");
+            throw new InvalidUsernameException("Nome não pode ser vazio ou nulo");
         }
         if(name.length() < 3) {
-            throw new IllegalArgumentException("Campo precisa no mínimo de 3 caracteres");
+            throw new InvalidUsernameException("Campo precisa no mínimo de 3 caracteres");
         }
         this.name = name;
     }

@@ -24,6 +24,14 @@ public class Vet {
         this.available = true;
     }
 
+    public Vet(UUID id, Name firstname, Name lastname, Crmv crmv) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.crmv = crmv;
+        this.available = true;
+    }
+
     public Vet() {
     }
 
