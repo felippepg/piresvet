@@ -30,6 +30,6 @@ public class VetMapper {
     }
 
     public VetResponse toResponse(Vet vet) {
-        return new VetResponse(vet.getFirstname(), vet.getLastname(), vet.getCrmv());
+        return new VetResponse(vet.getId(), vet.getFirstname(), vet.getLastname(), vet.getCrmv());
     }
 }
