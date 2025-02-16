@@ -10,7 +10,7 @@ import java.util.UUID;
 public interface PetOwnerRepository extends JpaRepository<PetOwnerEntity, UUID> {
     Optional<PetOwnerEntity> findByCpf(String cpf);
 
-    List<PetOwnerEntity> findByFirstnameAndLastname(String firstname, String lastname);
+    List<PetOwnerEntity> findByFirstnameIgnoreCaseAndLastnameIgnoreCase(String firstname, String lastname);
 
-    List<PetOwnerEntity> findByFirstname(String firstname);
+    List<PetOwnerEntity> findByFirstnameIgnoreCase(String firstname);
 }
