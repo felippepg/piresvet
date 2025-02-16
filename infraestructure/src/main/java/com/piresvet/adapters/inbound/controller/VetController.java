@@ -1,11 +1,15 @@
 package com.piresvet.adapters.inbound.controller;
 
+import com.piresvet.adapters.inbound.dtos.PetOwner.PetOwnerRequest;
+import com.piresvet.adapters.inbound.dtos.PetOwner.PetOwnerResponse;
 import com.piresvet.adapters.inbound.dtos.Vet.VetRequest;
 import com.piresvet.adapters.inbound.dtos.Vet.VetResponse;
 import com.piresvet.core.domain.Vet;
 import com.piresvet.dataMapper.VetMapper;
 import com.piresvet.useCaseContracts.Vet.CreateVetUseCase;
+import com.piresvet.useCaseContracts.Vet.DeleteVetUseCase;
 import com.piresvet.useCaseContracts.Vet.FindVetUseCase;
+import com.piresvet.useCaseContracts.Vet.UpdateVetUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +24,8 @@ import java.util.stream.Collectors;
 public class VetController {
 
     private final CreateVetUseCase createVetUseCase;
+    private final DeleteVetUseCase deleteVetUseCase;
+    private final UpdateVetUseCase updateVetUseCase;
     private final FindVetUseCase findVetUseCase;
     private final VetMapper mapper;
 
@@ -75,6 +81,18 @@ public class VetController {
         }
 
         return ResponseEntity.badRequest().body("Informe pelo menos um parâmetro para a busca.");
+    }
+
+    @PatchMapping("/update/{id}")
+    public ResponseEntity<VetResponse> updateVet(@PathVariable("id") UUID id, @RequestBody VetRequest request) {
+        var newVet = updateVetUseCase.update(id, mapper.toDomain(request));
+        return ResponseEntity.ok().body(mapper.toResponse(newVet));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteVet(@PathVariable("id") UUID id) {
+        deleteVetUseCase.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 
