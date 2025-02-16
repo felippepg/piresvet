@@ -1,5 +1,6 @@
 package com.piresvet.gatewayContracts.Vet;
 
+import com.piresvet.core.domain.PetOwner;
 import com.piresvet.core.domain.Vet;
 
 import java.util.List;
@@ -15,5 +16,8 @@ public interface FindVetGateway {
     List<Vet> findAvailable();
 
     List<Vet> findAll();
+
+    List<Vet> findByName(String firstname);
+
 
 }

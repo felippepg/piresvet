@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -32,8 +33,48 @@ public class VetController {
     public List<VetResponse> getVets() {
         var vets = findVetUseCase.findAll();
         return vets.stream()
-                .map(vet -> new VetResponse(vet.getFirstname(), vet.getLastname(), vet.getCrmv()))
+                .map(vet -> new VetResponse(vet.getId(), vet.getFirstname(), vet.getLastname(), vet.getCrmv()))
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/find-available")
+    public ResponseEntity<List<VetResponse>> getAvailableVets() {
+        var vets = findVetUseCase.findAvailable();
+        var response = vets.stream().map(vet -> new VetResponse(vet.getId(), vet.getFirstname(), vet.getLastname(), vet.getCrmv())).collect(Collectors.toList());
+
+        return ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping("/find/{id}")
+    public ResponseEntity<VetResponse> getVetById(@PathVariable("id")UUID id) {
+        var vet = findVetUseCase.findById(id);
+        var response = new VetResponse(vet.getId(), vet.getFirstname(), vet.getLastname(), vet.getCrmv());
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/find")
+    public ResponseEntity<?> findVet(
+            @RequestParam(name = "crmv", required = false) String crmv,
+            @RequestParam(name = "firstname", required = false) String firstname,
+            @RequestParam(name = "lastname", required = false) String lastname) {
+
+        if(crmv != null) {
+            var vet = findVetUseCase.findByCrm(crmv);
+            return ResponseEntity.ok(mapper.toResponse(vet));
+        }
+
+        if(firstname != null && lastname == null) {
+            var vet = findVetUseCase.findByName(firstname);
+            return ResponseEntity.ok(vet.stream().map(mapper::toResponse).collect(Collectors.toList()));
+        }
+
+        if (firstname != null) {
+            var vet = findVetUseCase.findByFullname(firstname, lastname);
+            return ResponseEntity.ok(vet.stream().map(mapper::toResponse).collect(Collectors.toList()));
+        }
+
+        return ResponseEntity.badRequest().body("Informe pelo menos um parâmetro para a busca.");
     }
 
 

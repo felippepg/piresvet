@@ -42,4 +42,9 @@ public class FindVetUseCaseImpl implements FindVetUseCase {
     public List<Vet> findAll() {
         return findVetGateway.findAll();
     }
+
+    @Override
+    public List<Vet> findByName(String firstname) {
+        return findVetGateway.findByName(firstname);
+    }
 }

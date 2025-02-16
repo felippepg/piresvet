@@ -15,4 +15,7 @@ public interface FindVetUseCase {
 
     List<Vet> findAll();
 
+    List<Vet> findByName(String firstname);
+
+
 }
