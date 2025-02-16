@@ -17,8 +17,8 @@ public class UpdateVetUseCaseImpl implements UpdateVetUseCase {
     }
 
     @Override
-    public Vet update(UUID id) {
+    public Vet update(UUID id, Vet vet) {
         this.findVetGateway.findById(id);
-        return this.updateVetUseGateway.update(id);
+        return this.updateVetUseGateway.update(id,vet);
     }
 }
