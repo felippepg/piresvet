@@ -7,5 +7,5 @@ CREATE TABLE Pet (
     pet_owner_id UUID,
     species VARCHAR(45),
     size VARCHAR(45),
-    CONSTRAINT fk_pet_owner FOREIGN KEY (pet_owner_id) REFERENCES PetOwner(Id)
+    CONSTRAINT fk_pet_owner FOREIGN KEY (pet_owner_id) REFERENCES Pet_Owner(Id)
 );
