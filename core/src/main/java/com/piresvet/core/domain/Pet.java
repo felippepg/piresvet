@@ -3,15 +3,15 @@ package com.piresvet.core.domain;
 import com.piresvet.core.enums.Size;
 import com.piresvet.core.enums.Species;
 
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.UUID;
 
 public class Pet {
     private UUID id;
     private String name;
     private Integer age;
-    private LocalDate createdAt;
-    private LocalDate updatedAt;
+    private Date createdAt;
+    private Date updatedAt;
     private PetOwner petOwner;
     private Species species;
     private Size size;
@@ -25,8 +25,20 @@ public class Pet {
         this.available = available;
     }
 
-    public Pet(String name, Integer age, LocalDate createdAt, LocalDate updatedAt, PetOwner petOwner, Species species, Size size) {
+    public Pet(String name, Integer age, Date createdAt, Date updatedAt, PetOwner petOwner, Species species, Size size) {
         this.id = UUID.randomUUID();
+        this.name = name;
+        this.age = age;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.petOwner = petOwner;
+        this.species = species;
+        this.size = size;
+        this.available = true;
+    }
+
+    public Pet(UUID id, String name, Integer age, Date createdAt, Date updatedAt, PetOwner petOwner, Species species, Size size) {
+        this.id = id;
         this.name = name;
         this.age = age;
         this.createdAt = createdAt;
@@ -58,19 +70,19 @@ public class Pet {
         this.age = age;
     }
 
-    public LocalDate getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDate getUpdatedAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDate updatedAt) {
+    public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 

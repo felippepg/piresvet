@@ -30,6 +30,6 @@ public class PetOwnerEntity {
     @Column(nullable = false, length = 14)
     private String cpf;
 
-    @OneToMany(mappedBy = "PetEntity")
+    @OneToMany(mappedBy = "petOwner")
     private List<PetEntity> pets;
 }
