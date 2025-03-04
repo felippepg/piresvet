@@ -1,4 +1,4 @@
-package com.piresvet.adapters.outbound.service.Pet;
+package com.piresvet.adapters.service.Pet;
 
 import com.piresvet.core.domain.Pet;
 import com.piresvet.dataMapper.PetMapper;
