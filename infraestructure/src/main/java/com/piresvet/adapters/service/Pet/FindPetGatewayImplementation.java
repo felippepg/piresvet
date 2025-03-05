@@ -27,8 +27,8 @@ public class FindPetGatewayImplementation implements FindPetsGateway {
 
     @Override
     public List<Pet> findByPetOwnerCpf(String cpf) {
-        var ownerEntity = petOwnerRepository.findByCpf(cpf).orElseThrow(() -> new PetOwnerNotFoundException("CPF não cadastrado"));
-        var owner = petOwnerMapper.toDomain(ownerEntity);
+        var ownerEntity = petOwnerRepository.findByCpf(cpf);
+        var owner = petOwnerMapper.toDomain(ownerEntity.get());
         var petEntities = petRepository.findByPetOwnerCpf(cpf);
 
         return petEntities.stream()
@@ -46,7 +46,8 @@ public class FindPetGatewayImplementation implements FindPetsGateway {
 
     @Override
     public Optional<Pet> findPetById(UUID id) {
-        var pet = petRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Pet não cadastrado"));
-        return Optional.ofNullable(petMapper.toDomain(pet, petOwnerMapper.toDomain(pet.getPetOwner())));
+        return petRepository.findById(id)
+                .map(petEntity -> petMapper.toDomain(petEntity, petOwnerMapper.toDomain(petEntity.getPetOwner())));
     }
+
 }

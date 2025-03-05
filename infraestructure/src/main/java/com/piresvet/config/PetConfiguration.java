@@ -4,6 +4,7 @@ import com.piresvet.gatewayContracts.Pet.CreatePetGateway;
 import com.piresvet.gatewayContracts.Pet.DeletePetGateway;
 import com.piresvet.gatewayContracts.Pet.FindPetsGateway;
 import com.piresvet.gatewayContracts.Pet.UpdatePetGateway;
+import com.piresvet.gatewayContracts.PetOwner.FindPetOwnerGateway;
 import com.piresvet.useCaseContracts.Pet.CreatePetUseCase;
 import com.piresvet.useCaseContracts.Pet.DeletePetUseCase;
 import com.piresvet.useCaseContracts.Pet.FindPetsUseCase;
@@ -23,8 +24,8 @@ public class PetConfiguration {
     }
 
     @Bean
-    public FindPetsUseCase findPetsUseCase(FindPetsGateway gateway) {
-        return new FindPetsUseCaseImpl(gateway);
+    public FindPetsUseCase findPetsUseCase(FindPetsGateway gateway, FindPetOwnerGateway petOwnerGateway) {
+        return new FindPetsUseCaseImpl(gateway, petOwnerGateway);
     }
 
     @Bean
