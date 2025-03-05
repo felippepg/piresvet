@@ -9,16 +9,13 @@ import java.util.UUID;
 
 public class UpdatePetUseCaseImpl implements UpdatePetUseCase {
     private final UpdatePetGateway updatePetGateway;
-    private final FindPetsGateway findPetsGateway;
 
-    public UpdatePetUseCaseImpl(UpdatePetGateway updatePetGateway, FindPetsGateway findPetsGateway) {
+    public UpdatePetUseCaseImpl(UpdatePetGateway updatePetGateway) {
         this.updatePetGateway = updatePetGateway;
-        this.findPetsGateway = findPetsGateway;
     }
 
     @Override
-    public Pet update(UUID id) {
-        findPetsGateway.findPetById(id);
-        return updatePetGateway.update(id);
+    public Pet update(UUID id, Pet pet) {
+        return updatePetGateway.update(id, pet);
     }
 }
