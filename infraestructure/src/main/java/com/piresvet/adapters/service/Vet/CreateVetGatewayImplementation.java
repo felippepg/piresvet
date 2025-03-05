@@ -1,4 +1,4 @@
-package com.piresvet.adapters.outbound.service.Vet;
+package com.piresvet.adapters.service.Vet;
 
 import com.piresvet.core.domain.Vet;
 import com.piresvet.gatewayContracts.Vet.CreateVetGateway;

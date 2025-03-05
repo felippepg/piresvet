@@ -31,4 +31,13 @@ public class PetOwnerMapper {
     public PetOwnerResponse toResponse(PetOwner petOwner) {
         return new PetOwnerResponse(petOwner.getId(), petOwner.getFirstname(), petOwner.getLastname(), petOwner.getCpf().getCpf());
     }
+
+    public PetOwnerEntity toEntityWithId(PetOwner owner) {
+        return PetOwnerEntity.builder()
+                .id(owner.getId())
+                .firstname(owner.getFirstname())
+                .lastname(owner.getLastname())
+                .cpf(owner.getCpf().getCpf())
+                .build();
+    }
 }

@@ -1,4 +1,4 @@
-package com.piresvet.adapters.outbound.service.PetOwner;
+package com.piresvet.adapters.service.PetOwner;
 
 import com.piresvet.core.domain.PetOwner;
 import com.piresvet.core.exception.PetOwnerNotFoundException;
