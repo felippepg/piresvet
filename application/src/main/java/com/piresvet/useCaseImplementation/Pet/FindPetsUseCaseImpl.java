@@ -17,7 +17,7 @@ public class FindPetsUseCaseImpl implements FindPetsUseCase {
 
     @Override
     public List<Pet> findByPetOwnerCpf(String cpf) {
-        return findByPetOwnerCpf(cpf);
+        return findPetsGateway.findByPetOwnerCpf(cpf);
     }
 
     @Override

@@ -31,6 +31,7 @@ public class PetMapper {
 
     public Pet toDomain(PetEntity entity, PetOwner owner) {
        return new Pet(
+                entity.getId(),
                 entity.getName(),
                 entity.getAge(),
                 entity.getCreatedAt(),
