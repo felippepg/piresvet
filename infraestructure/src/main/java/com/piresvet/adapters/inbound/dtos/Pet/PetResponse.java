@@ -17,6 +17,6 @@ public record PetResponse(
         Species species,
         Date createdAt,
         Date updatedAt,
-        PetOwnerResponse petOwnerResponse
+        PetOwnerResponse owner
 ) {
 }

@@ -37,7 +37,7 @@ public class Pet {
         this.available = true;
     }
 
-    public Pet(UUID id, String name, Integer age, Date createdAt, Date updatedAt, PetOwner petOwner, Species species, Size size) {
+    public Pet(UUID id, String name, Integer age, Date createdAt, Date updatedAt, PetOwner petOwner, Species species, Size size, Boolean available) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -46,7 +46,7 @@ public class Pet {
         this.petOwner = petOwner;
         this.species = species;
         this.size = size;
-        this.available = true;
+        this.available = available;
     }
 
     public UUID getId() {

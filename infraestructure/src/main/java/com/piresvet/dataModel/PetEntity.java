@@ -31,7 +31,7 @@ public class PetEntity {
     private int age;
 
     @ManyToOne
-    @JoinColumn(name = "pet_owner_id", nullable = false)  // Coloquei nullable = false para garantir que o pet sempre terá um dono
+    @JoinColumn(name = "pet_owner_id", nullable = false)
     private PetOwnerEntity petOwner;
 
     @Enumerated(EnumType.STRING)
@@ -46,6 +46,7 @@ public class PetEntity {
     @Column(name = "updated_at", nullable = false)
     private Date updatedAt;
 
+    private Boolean available;
     @PrePersist
     public void prePersist() {
         Date now = Date.valueOf(LocalDate.now());
