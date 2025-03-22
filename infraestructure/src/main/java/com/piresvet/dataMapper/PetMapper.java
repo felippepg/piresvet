@@ -38,7 +38,8 @@ public class PetMapper {
                 entity.getUpdatedAt(),
                 owner,
                 entity.getSpecies(),
-                entity.getSize()
+                entity.getSize(),
+                entity.getAvailable()
                 );
     }
 

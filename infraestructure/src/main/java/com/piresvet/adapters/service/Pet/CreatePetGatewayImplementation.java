@@ -18,9 +18,10 @@ public class CreatePetGatewayImplementation implements CreatePetGateway {
     public Pet create(Pet pet) {
         var petOwnerEntity = petOwnerMapper.toEntityWithId(pet.getPetOwner());
         var petEntity = petMapper.toEntity(pet, petOwnerEntity);
-
-        var petOwnerDomain = petOwnerMapper.toDomain(petEntity.getPetOwner());
+        petEntity.setAvailable(true);
         repository.save(petEntity);
+        var petOwnerDomain = petOwnerMapper.toDomain(petEntity.getPetOwner());
+
         return petMapper.toDomain(petEntity, petOwnerDomain);
     }
 }

@@ -22,6 +22,8 @@ public class CreateAppointmentUseCaseImpl implements CreateAppointmentUseCase {
     @Override
     public Appointments create(Appointments appointment) {
         if(verifyAvailablePetGateway.verify(appointment.getPet()) && verifyAvailableVetGateway.verify(appointment.getVet())) {
+            appointment.getVet().setAvailable(false);
+            appointment.getPet().setAvailable(false);
             return createAppointmentGateway.create(appointment);
         }
         throw new InvalidAppointmentsException("Nâo foi possivel cadastrar consulta, verifique disponibilidade do veteriário e do pet");

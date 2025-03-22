@@ -3,20 +3,30 @@ package com.piresvet.core.domain;
 import com.piresvet.core.enums.Services;
 
 import java.math.BigInteger;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.UUID;
 
 public class Appointments {
     private UUID id;
     private BigInteger expected;
     private Services services;
-    private LocalDate createdAt;
-    private LocalDate updatedAt;
+    private Date createdAt;
+    private Date updatedAt;
     private Pet pet;
     private Vet vet;
 
-    public Appointments(BigInteger expected, Services services, LocalDate createdAt, LocalDate updatedAt, Pet pet, Vet vet) {
+    public Appointments(BigInteger expected, Services services, Date createdAt, Date updatedAt, Pet pet, Vet vet) {
         this.id = UUID.randomUUID();
+        this.expected = expected;
+        this.services = services;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.pet = pet;
+        this.vet = vet;
+    }
+
+    public Appointments(UUID id, BigInteger expected, Services services, Date createdAt, Date updatedAt, Pet pet, Vet vet) {
+        this.id = id;
         this.expected = expected;
         this.services = services;
         this.createdAt = createdAt;
@@ -45,19 +55,19 @@ public class Appointments {
         this.services = services;
     }
 
-    public LocalDate getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDate getUpdatedAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDate updatedAt) {
+    public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 

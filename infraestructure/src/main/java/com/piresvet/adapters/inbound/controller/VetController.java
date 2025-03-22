@@ -32,7 +32,7 @@ public class VetController {
     public List<VetResponse> getVets() {
         var vets = findVetUseCase.findAll();
         return vets.stream()
-                .map(vet -> new VetResponse(vet.getFirstname(), vet.getLastname(), vet.getCrmv()))
+                .map(vet -> new VetResponse(vet.getId(), vet.getFirstname(), vet.getLastname(), vet.getCrmv(), vet.getAvailable()))
                 .collect(Collectors.toList());
     }
 
