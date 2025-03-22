@@ -21,7 +21,8 @@ public class FindVetGatewayImplementation implements FindVetGateway {
 
     @Override
     public Optional<Vet> findById(UUID id) {
-        return Optional.empty();
+        var vet = repository.findById(id);
+        return Optional.ofNullable(mapper.toDomain(vet.get()));
     }
 
     @Override
