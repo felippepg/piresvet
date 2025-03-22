@@ -11,8 +11,8 @@ public class VetFactory {
         return new Vet( new Name(firstname),new Name(lastname), new Crmv(crmv));
     }
 
-    public Vet create(UUID id, String firstname, String lastname, String crmv) {
-        return new Vet(id, new Name(firstname),new Name(lastname), new Crmv(crmv));
+    public Vet create(UUID id, String firstname, String lastname, String crmv, Boolean available) {
+        return new Vet(id, new Name(firstname),new Name(lastname), new Crmv(crmv), available);
     }
 
 }
