@@ -1,7 +1,5 @@
 package com.piresvet.adapters.inbound.controller;
 
-import com.piresvet.adapters.inbound.dtos.PetOwner.PetOwnerRequest;
-import com.piresvet.adapters.inbound.dtos.PetOwner.PetOwnerResponse;
 import com.piresvet.adapters.inbound.dtos.Vet.VetRequest;
 import com.piresvet.adapters.inbound.dtos.Vet.VetResponse;
 import com.piresvet.core.domain.Vet;
@@ -39,14 +37,14 @@ public class VetController {
     public List<VetResponse> getVets() {
         var vets = findVetUseCase.findAll();
         return vets.stream()
-                .map(vet -> new VetResponse(vet.getId(), vet.getFirstname(), vet.getLastname(), vet.getCrmv()))
+                .map(vet -> new VetResponse(vet.getId(), vet.getFirstname(), vet.getLastname(), vet.getCrmv(), vet.getAvailable()))
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/find-available")
     public ResponseEntity<List<VetResponse>> getAvailableVets() {
         var vets = findVetUseCase.findAvailable();
-        var response = vets.stream().map(vet -> new VetResponse(vet.getId(), vet.getFirstname(), vet.getLastname(), vet.getCrmv())).collect(Collectors.toList());
+        var response = vets.stream().map(vet -> new VetResponse(vet.getId(), vet.getFirstname(), vet.getLastname(), vet.getCrmv(), vet.getAvailable())).collect(Collectors.toList());
 
         return ResponseEntity.ok().body(response);
     }
@@ -54,7 +52,7 @@ public class VetController {
     @GetMapping("/find/{id}")
     public ResponseEntity<VetResponse> getVetById(@PathVariable("id")UUID id) {
         var vet = findVetUseCase.findById(id);
-        var response = new VetResponse(vet.getId(), vet.getFirstname(), vet.getLastname(), vet.getCrmv());
+        var response = new VetResponse(vet.getId(), vet.getFirstname(), vet.getLastname(), vet.getCrmv(), vet.getAvailable());
 
         return ResponseEntity.ok(response);
     }

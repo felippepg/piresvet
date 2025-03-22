@@ -22,7 +22,7 @@ public class VetMapper {
     }
 
     public Vet toDomain(VetEntity entity) {
-        return factory.create(entity.getId(), entity.getFirstname(), entity.getLastname(), entity.getCrmv());
+        return factory.create(entity.getId(), entity.getFirstname(), entity.getLastname(), entity.getCrmv(), entity.getAvailable());
     }
 
     public Vet toDomain(VetRequest request) {
@@ -30,6 +30,6 @@ public class VetMapper {
     }
 
     public VetResponse toResponse(Vet vet) {
-        return new VetResponse(vet.getId(), vet.getFirstname(), vet.getLastname(), vet.getCrmv());
+        return new VetResponse(vet.getId(), vet.getFirstname(), vet.getLastname(), vet.getCrmv(), vet.getAvailable());
     }
 }

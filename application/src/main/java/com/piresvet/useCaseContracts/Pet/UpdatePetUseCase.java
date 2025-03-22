@@ -5,5 +5,5 @@ import com.piresvet.core.domain.Pet;
 import java.util.UUID;
 
 public interface UpdatePetUseCase {
-    Pet update(UUID id);
+    Pet update(UUID id, Pet pet);
 }
