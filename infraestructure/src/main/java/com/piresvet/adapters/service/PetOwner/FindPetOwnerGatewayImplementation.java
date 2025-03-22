@@ -26,7 +26,7 @@ public class FindPetOwnerGatewayImplementation implements FindPetOwnerGateway {
 
     @Override
     public List<PetOwner> findByFullname(String firstname, String lastname) {
-        var petOwners = repository.findByFirstnameAndLastname(firstname, lastname);
+        var petOwners = repository.findByFirstnameIgnoreCaseAndLastnameIgnoreCase(firstname, lastname);
         return petOwners.stream().map(mapper::toDomain)
                 .collect(Collectors.toList());
     }
@@ -47,7 +47,7 @@ public class FindPetOwnerGatewayImplementation implements FindPetOwnerGateway {
 
     @Override
     public List<PetOwner> findByName(String firstname) {
-        var petOwners = repository.findByFirstname(firstname);
+        var petOwners = repository.findByFirstnameIgnoreCase(firstname);
         return petOwners.stream().map(mapper::toDomain)
                 .collect(Collectors.toList());
     }
