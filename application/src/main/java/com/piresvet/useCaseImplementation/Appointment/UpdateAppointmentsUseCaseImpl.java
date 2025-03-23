@@ -17,8 +17,8 @@ public class UpdateAppointmentsUseCaseImpl implements UpdateAppointmentsUseCase 
     }
 
     @Override
-    public Appointments update(UUID id) {
+    public Appointments update(UUID id, Appointments appointments) {
         findAppointmentsGateway.findById(id);
-        return updateAppointmentsGateway.update(id);
+        return updateAppointmentsGateway.update(id, appointments);
     }
 }
