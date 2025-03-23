@@ -3,10 +3,8 @@ package com.piresvet.adapters.inbound.controller;
 import com.piresvet.adapters.inbound.dtos.Appointment.AppointmentRequest;
 import com.piresvet.adapters.inbound.dtos.Appointment.AppointmentResponse;
 import com.piresvet.dataMapper.AppointmentMapper;
-import com.piresvet.dataMapper.PetMapper;
-import com.piresvet.dataMapper.PetOwnerMapper;
-import com.piresvet.dataMapper.VetMapper;
 import com.piresvet.useCaseContracts.Appointment.CreateAppointmentUseCase;
+import com.piresvet.useCaseContracts.Appointment.DeleteAppointmentsUseCase;
 import com.piresvet.useCaseContracts.Appointment.FindAppointmentsUseCase;
 import com.piresvet.useCaseContracts.Appointment.UpdateAppointmentsUseCase;
 import com.piresvet.useCaseContracts.Pet.FindPetsUseCase;
@@ -31,10 +29,7 @@ public class AppointmentController {
     private final AppointmentMapper appointmentMapper;
     private final FindAppointmentsUseCase findAppointmentsUseCase;
     private final UpdateAppointmentsUseCase updateAppointmentsUseCase;
-
-    private final PetMapper petMapper;
-    private final PetOwnerMapper petOwnerMapper;
-    private final VetMapper vetMapper;
+    private final DeleteAppointmentsUseCase deleteAppointmentsUseCase;
 
     @PostMapping("/create")
     public ResponseEntity<AppointmentResponse> createVet(@RequestBody AppointmentRequest request) {
@@ -44,7 +39,6 @@ public class AppointmentController {
         var response = createAppointmentUseCase.create(appointment);
         return ResponseEntity.ok(appointmentMapper.toResponse(response));
     }
-
 
     @GetMapping("/find-all")
     public ResponseEntity<List<AppointmentResponse>> findAllAppointments() {
@@ -74,6 +68,12 @@ public class AppointmentController {
 
         return ResponseEntity.ok(appointmentMapper.toResponse(response));
 
+    }
+
+    @DeleteMapping("/cancel/{id}")
+    public ResponseEntity<AppointmentResponse> cancelAppointment(@PathVariable("id") UUID id) {
+        deleteAppointmentsUseCase.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 
