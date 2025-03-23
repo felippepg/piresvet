@@ -3,10 +3,7 @@ package com.piresvet.adapters.inbound.controller;
 import com.piresvet.adapters.inbound.dtos.Appointment.AppointmentRequest;
 import com.piresvet.adapters.inbound.dtos.Appointment.AppointmentResponse;
 import com.piresvet.dataMapper.AppointmentMapper;
-import com.piresvet.useCaseContracts.Appointment.CreateAppointmentUseCase;
-import com.piresvet.useCaseContracts.Appointment.DeleteAppointmentsUseCase;
-import com.piresvet.useCaseContracts.Appointment.FindAppointmentsUseCase;
-import com.piresvet.useCaseContracts.Appointment.UpdateAppointmentsUseCase;
+import com.piresvet.useCaseContracts.Appointment.*;
 import com.piresvet.useCaseContracts.Pet.FindPetsUseCase;
 import com.piresvet.useCaseContracts.Vet.FindVetUseCase;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +27,7 @@ public class AppointmentController {
     private final FindAppointmentsUseCase findAppointmentsUseCase;
     private final UpdateAppointmentsUseCase updateAppointmentsUseCase;
     private final DeleteAppointmentsUseCase deleteAppointmentsUseCase;
+    private final FinishedAppointmentsUseCase finishedAppointmentsUseCase;
 
     @PostMapping("/create")
     public ResponseEntity<AppointmentResponse> createVet(@RequestBody AppointmentRequest request) {
@@ -74,6 +72,12 @@ public class AppointmentController {
     public ResponseEntity<AppointmentResponse> cancelAppointment(@PathVariable("id") UUID id) {
         deleteAppointmentsUseCase.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/finished/{id}")
+    public ResponseEntity<AppointmentResponse> finishedAppoint(@PathVariable("id") UUID id) {
+        var appointment = finishedAppointmentsUseCase.finished(id);
+        return ResponseEntity.ok().body(appointmentMapper.toResponse(appointment));
     }
 
 

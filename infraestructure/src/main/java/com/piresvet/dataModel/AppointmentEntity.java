@@ -46,6 +46,9 @@ public class AppointmentEntity {
     @Column(name = "size", length = 45)
     private String size;
 
+    @Column(name = "is_finished")
+    private Boolean isFinished;
+
     @PrePersist
     public void prePersist() {
         java.sql.Date now = java.sql.Date.valueOf(LocalDate.now());

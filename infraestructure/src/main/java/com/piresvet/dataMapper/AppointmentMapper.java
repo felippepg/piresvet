@@ -26,7 +26,8 @@ public class AppointmentMapper {
                 entity.getCreatedAt(),
                 entity.getUpdatedAt(),
                 pet,
-                vet);
+                vet,
+                entity.getIsFinished());
     }
 
     public AppointmentEntity toEntity(Appointments appointment, PetEntity pet, VetEntity vet) {
@@ -37,6 +38,7 @@ public class AppointmentMapper {
                 .createdAt(null)
                 .pet(pet)
                 .vet(vet)
+                .isFinished(appointment.getFinished())
                 .build();
     }
 
@@ -48,7 +50,8 @@ public class AppointmentMapper {
                 null,
                 null,
                 pet,
-                vet);
+                vet,
+                false);
     }
 
     public AppointmentResponse toResponse(Appointments appointments) {
@@ -62,7 +65,8 @@ public class AppointmentMapper {
                 appointments.getCreatedAt(),
                 appointments.getUpdatedAt(),
                 petResponse,
-                vetResponse
+                vetResponse,
+                appointments.getFinished()
 
         );
     }

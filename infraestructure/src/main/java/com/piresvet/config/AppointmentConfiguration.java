@@ -1,14 +1,8 @@
 package com.piresvet.config;
 
 import com.piresvet.gatewayContracts.Appointments.*;
-import com.piresvet.useCaseContracts.Appointment.CreateAppointmentUseCase;
-import com.piresvet.useCaseContracts.Appointment.DeleteAppointmentsUseCase;
-import com.piresvet.useCaseContracts.Appointment.FindAppointmentsUseCase;
-import com.piresvet.useCaseContracts.Appointment.UpdateAppointmentsUseCase;
-import com.piresvet.useCaseImplementation.Appointment.CreateAppointmentUseCaseImpl;
-import com.piresvet.useCaseImplementation.Appointment.DeleteAppointmentsUseCaseImpl;
-import com.piresvet.useCaseImplementation.Appointment.FindAppointmentsUseCaseImpl;
-import com.piresvet.useCaseImplementation.Appointment.UpdateAppointmentsUseCaseImpl;
+import com.piresvet.useCaseContracts.Appointment.*;
+import com.piresvet.useCaseImplementation.Appointment.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -32,5 +26,10 @@ public class AppointmentConfiguration {
     @Bean
     public DeleteAppointmentsUseCase deleteAppointmentsUseCase(DeleteAppointmentsGateway deleteAppointmentsGateway, FindAppointmentsGateway findAppointmentsGateway) {
         return new DeleteAppointmentsUseCaseImpl(deleteAppointmentsGateway, findAppointmentsGateway);
+    }
+
+    @Bean
+    public FinishedAppointmentsUseCase finishedAppointmentsUseCase(FinishedAppointmentsGateway finishedAppointmentsGateway, FindAppointmentsGateway findAppointmentsGateway) {
+        return new FinishedAppointmentsUseCaseImpl(finishedAppointmentsGateway, findAppointmentsGateway);
     }
 }
