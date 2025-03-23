@@ -15,6 +15,8 @@ public class Appointments {
     private Pet pet;
     private Vet vet;
 
+    private Boolean isFinished;
+
     public Appointments(BigInteger expected, Services services, Date createdAt, Date updatedAt, Pet pet, Vet vet) {
         this.id = UUID.randomUUID();
         this.expected = expected;
@@ -23,9 +25,10 @@ public class Appointments {
         this.updatedAt = updatedAt;
         this.pet = pet;
         this.vet = vet;
+        this.isFinished = false;
     }
 
-    public Appointments(UUID id, BigInteger expected, Services services, Date createdAt, Date updatedAt, Pet pet, Vet vet) {
+    public Appointments(UUID id, BigInteger expected, Services services, Date createdAt, Date updatedAt, Pet pet, Vet vet, Boolean isFinished) {
         this.id = id;
         this.expected = expected;
         this.services = services;
@@ -33,6 +36,15 @@ public class Appointments {
         this.updatedAt = updatedAt;
         this.pet = pet;
         this.vet = vet;
+        this.isFinished = isFinished;
+    }
+
+    public Boolean getFinished() {
+        return isFinished;
+    }
+
+    public void setFinished(Boolean finished) {
+        isFinished = finished;
     }
 
     public UUID getId() {
