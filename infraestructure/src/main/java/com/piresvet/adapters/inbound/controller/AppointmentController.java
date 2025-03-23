@@ -3,8 +3,12 @@ package com.piresvet.adapters.inbound.controller;
 import com.piresvet.adapters.inbound.dtos.Appointment.AppointmentRequest;
 import com.piresvet.adapters.inbound.dtos.Appointment.AppointmentResponse;
 import com.piresvet.dataMapper.AppointmentMapper;
+import com.piresvet.dataMapper.PetMapper;
+import com.piresvet.dataMapper.PetOwnerMapper;
+import com.piresvet.dataMapper.VetMapper;
 import com.piresvet.useCaseContracts.Appointment.CreateAppointmentUseCase;
 import com.piresvet.useCaseContracts.Appointment.FindAppointmentsUseCase;
+import com.piresvet.useCaseContracts.Appointment.UpdateAppointmentsUseCase;
 import com.piresvet.useCaseContracts.Pet.FindPetsUseCase;
 import com.piresvet.useCaseContracts.Vet.FindVetUseCase;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +30,11 @@ public class AppointmentController {
     private final FindVetUseCase findVetUseCase;
     private final AppointmentMapper appointmentMapper;
     private final FindAppointmentsUseCase findAppointmentsUseCase;
+    private final UpdateAppointmentsUseCase updateAppointmentsUseCase;
+
+    private final PetMapper petMapper;
+    private final PetOwnerMapper petOwnerMapper;
+    private final VetMapper vetMapper;
 
     @PostMapping("/create")
     public ResponseEntity<AppointmentResponse> createVet(@RequestBody AppointmentRequest request) {
@@ -53,6 +62,18 @@ public class AppointmentController {
     public ResponseEntity<?> findByCpf(@RequestParam(name = "cpf", required = true) String cpf) {
         var appointments = findAppointmentsUseCase.findByCpfOwner(cpf);
         return ResponseEntity.ok(appointments.stream().map(appointmentMapper::toResponse));
+    }
+
+    @PatchMapping("/update/{id}")
+    public ResponseEntity<AppointmentResponse> updateAppointment(
+            @PathVariable("id") UUID id, @RequestBody AppointmentRequest request) {
+        var pet = findPetsUseCase.findPetById(request.pet());
+        var vet = findVetUseCase.findById(request.vet());
+        var appointment = appointmentMapper.toDomain(request, pet, vet);
+        var response = updateAppointmentsUseCase.update(id, appointment);
+
+        return ResponseEntity.ok(appointmentMapper.toResponse(response));
+
     }
 
 
