@@ -6,6 +6,7 @@ import com.piresvet.useCaseContracts.Appointment.FindAppointmentsUseCase;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.UUID;
 
 public class FindAppointmentsUseCaseImpl implements FindAppointmentsUseCase {
@@ -25,4 +26,16 @@ public class FindAppointmentsUseCaseImpl implements FindAppointmentsUseCase {
         var optional = findAppointmentsGateway.findById(id);
         return optional.orElseThrow(() -> new NoSuchElementException("Não foi possivel localizar consulta"));
     }
+
+    @Override
+    public List<Appointments> findByCpfOwner(String cpf) {
+        var appointments = findAppointmentsGateway.findByCpfOwner(cpf);
+
+        if (appointments == null) {
+            throw new NoSuchElementException("Não foi possível localizar consulta com esse CPF do dono do Pet!");
+        }
+
+        return appointments;
+    }
+
 }

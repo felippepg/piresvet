@@ -4,6 +4,6 @@ import com.piresvet.core.domain.Appointments;
 
 import java.util.UUID;
 
-public interface UpdateAppointmentsUseCase {
-    Appointments update(UUID id, Appointments appointments);
+public interface FinishedAppointmentsUseCase {
+    Appointments finished(UUID id);
 }

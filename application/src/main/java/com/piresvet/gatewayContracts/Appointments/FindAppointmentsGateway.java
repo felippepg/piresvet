@@ -9,4 +9,6 @@ import java.util.UUID;
 public interface FindAppointmentsGateway {
     List<Appointments> findAll();
     Optional<Appointments> findById(UUID id);
+
+    List<Appointments> findByCpfOwner(String cpf);
 }

@@ -32,4 +32,14 @@ public class VetMapper {
     public VetResponse toResponse(Vet vet) {
         return new VetResponse(vet.getId(), vet.getFirstname(), vet.getLastname(), vet.getCrmv(), vet.getAvailable());
     }
+
+    public VetEntity toEntityWithId(Vet vet) {
+        return VetEntity.builder()
+                .id(vet.getId())
+                .firstname(vet.getFirstname())
+                .lastname(vet.getLastname())
+                .crmv(vet.getCrmv())
+                .available(true)
+                .build();
+    }
 }

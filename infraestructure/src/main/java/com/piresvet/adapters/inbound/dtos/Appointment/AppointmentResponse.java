@@ -8,5 +8,5 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.UUID;
 
-public record AppointmentResponse(UUID id, BigInteger expected, Services services, Date created_at, Date updated_at, PetResponse pet, VetResponse vet) {
+public record AppointmentResponse(UUID id, BigInteger expected, Services services, Date created_at, Date updated_at, PetResponse pet, VetResponse vet, Boolean isFinished) {
 }
