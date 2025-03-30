@@ -2,11 +2,14 @@ package com.piresvet.adapters.inbound.advice;
 
 import com.piresvet.adapters.inbound.dtos.RestErrorMessage;
 import com.piresvet.core.exception.*;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
 
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
@@ -43,7 +46,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(PetOwnerAlreadyExistsException.class)
     private ResponseEntity<RestErrorMessage>alreadyExistsPetOwnerException(PetOwnerAlreadyExistsException exception) {
-        var response = new RestErrorMessage(HttpStatus.BAD_REQUEST, exception.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        var response = new RestErrorMessage(HttpStatus.CONFLICT, exception.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
     }
+
+
 }

@@ -1,5 +1,6 @@
 package com.piresvet.core.domain.valueobjects;
 
+import com.piresvet.core.exception.InvalidCpfException;
 import com.piresvet.core.exception.InvalidCrmvException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,7 @@ class CpfTest {
     @Test
     @DisplayName("Should not create Cpf with null params")
     public void shouldNotCreateCpfWithNullParams() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Cpf(null));
+        Exception exception = assertThrows(InvalidCpfException.class, () -> new Cpf(null));
 
         assertEquals("CPF não pode ser nulo!", exception.getMessage());
     }

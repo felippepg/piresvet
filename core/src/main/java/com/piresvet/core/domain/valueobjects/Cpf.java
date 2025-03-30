@@ -9,7 +9,9 @@ public class Cpf {
     private final String cpf;
 
     public Cpf(String cpf) {
-        if (cpf == null) throw new IllegalArgumentException("CPF não pode ser nulo!");
+        if (cpf == null || cpf.trim().isEmpty()){
+            throw new InvalidCpfException("CPF não pode ser nulo!");
+        }
         if (!CPF_PATTERN.matcher(cpf).matches()) throw new InvalidCpfException("Formato do CPF inválido");
 
         this.cpf = cpf;
