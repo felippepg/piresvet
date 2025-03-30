@@ -1,5 +1,6 @@
 package com.piresvet.useCaseImplementation.PetOwner;
 
+import com.piresvet.core.exception.PetOwnerNotFoundException;
 import com.piresvet.gatewayContracts.PetOwner.DeletePetOwnerGateway;
 import com.piresvet.gatewayContracts.PetOwner.FindPetOwnerGateway;
 import com.piresvet.useCaseContracts.PetOwner.DeletePetOwnerUseCase;
@@ -17,7 +18,9 @@ public class DeletePetOwnerUseCaseImpl implements DeletePetOwnerUseCase {
 
     @Override
     public void delete(UUID id) {
-        findPetOwnerGateway.findById(id);
+        findPetOwnerGateway.findById(id)
+                .orElseThrow(() -> new PetOwnerNotFoundException("Tutor não encontrado"));
+
         deletePetOwnerGateway.delete(id);
     }
 }

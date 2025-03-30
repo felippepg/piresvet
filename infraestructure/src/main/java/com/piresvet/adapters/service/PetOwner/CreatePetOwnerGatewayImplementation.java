@@ -16,10 +16,6 @@ public class CreatePetOwnerGatewayImplementation implements CreatePetOwnerGatewa
     private final PetOwnerMapper mapper;
     @Override
     public PetOwner create(PetOwner owner) {
-        var petOwner = repository.findByCpf(owner.getCpf().getCpf());
-        if(petOwner.isPresent())
-            throw new PetOwnerAlreadyExistsException("Tutor já cadastrado");
-
         var entity = mapper.toEntity(owner);
         var result = repository.save(entity);
         return mapper.toDomain(result);

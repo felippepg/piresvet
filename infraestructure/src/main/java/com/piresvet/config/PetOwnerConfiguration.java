@@ -19,8 +19,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class PetOwnerConfiguration {
     @Bean
-    public CreatePetOwnerUseCase createPetOwnerUseCase(CreatePetOwnerGateway createPetOwnerGateway){
-        return new CreatePetOwnerUseCaseImpl(createPetOwnerGateway);
+    public CreatePetOwnerUseCase createPetOwnerUseCase(CreatePetOwnerGateway createPetOwnerGateway, FindPetOwnerGateway findPetOwnerGateway){
+        return new CreatePetOwnerUseCaseImpl(createPetOwnerGateway, findPetOwnerGateway);
     }
 
     @Bean

@@ -15,7 +15,7 @@ public class DeletePetOwnerGatewayImplementation implements DeletePetOwnerGatewa
 
     @Override
     public void delete(UUID id) {
-        var petOwner = repository.findById(id).orElseThrow(() -> new PetOwnerNotFoundException("Tutor não encontrado"));
-        repository.delete(petOwner);
+        var petOwner = repository.findById(id);
+        repository.delete(petOwner.get());
     }
 }
