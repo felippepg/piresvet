@@ -20,8 +20,8 @@ import org.springframework.context.annotation.Configuration;
 public class VetConfiguration {
 
     @Bean
-    public CreateVetUseCase createVetUseCase(CreateVetGateway createVetGateway) {
-        return new CreateVetUseCaseImpl(createVetGateway);
+    public CreateVetUseCase createVetUseCase(CreateVetGateway createVetGateway, FindVetGateway findVetGateway) {
+        return new CreateVetUseCaseImpl(createVetGateway, findVetGateway);
     }
 
     @Bean

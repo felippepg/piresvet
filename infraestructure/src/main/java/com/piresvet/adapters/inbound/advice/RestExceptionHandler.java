@@ -50,5 +50,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
     }
 
+    @ExceptionHandler(VetAlreadyExistsException.class)
+    private ResponseEntity<RestErrorMessage>alreadyExistsVetException(VetAlreadyExistsException exception) {
+        var response = new RestErrorMessage(HttpStatus.CONFLICT, exception.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+    }
+
 
 }
