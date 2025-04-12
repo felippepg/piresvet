@@ -29,13 +29,13 @@ public class PetConfiguration {
     }
 
     @Bean
-    public UpdatePetUseCase updatePetUseCase(UpdatePetGateway gateway) {
-        return new UpdatePetUseCaseImpl(gateway);
+    public UpdatePetUseCase updatePetUseCase(UpdatePetGateway gateway, FindPetsGateway findPetsGateway) {
+        return new UpdatePetUseCaseImpl(gateway, findPetsGateway);
     }
 
     @Bean
-    public DeletePetUseCase deletePetUseCase(DeletePetGateway gateway) {
-        return new DeletePetUseCaseImpl(gateway);
+    public DeletePetUseCase deletePetUseCase(DeletePetGateway gateway, FindPetsGateway findPetsGateway) {
+        return new DeletePetUseCaseImpl(gateway, findPetsGateway);
     }
 
 }

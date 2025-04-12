@@ -35,6 +35,7 @@ public class PetEntity {
     private PetOwnerEntity petOwner;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Species species;
 
     @Enumerated(EnumType.STRING)
