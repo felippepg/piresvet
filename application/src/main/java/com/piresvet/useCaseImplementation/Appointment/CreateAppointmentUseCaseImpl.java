@@ -26,6 +26,6 @@ public class CreateAppointmentUseCaseImpl implements CreateAppointmentUseCase {
             appointment.getPet().setAvailable(false);
             return createAppointmentGateway.create(appointment);
         }
-        throw new InvalidAppointmentsException("Nâo foi possivel cadastrar consulta, verifique disponibilidade do veteriário e do pet");
+        throw new InvalidAppointmentsException("Não foi possivel cadastrar consulta, verifique disponibilidade do veteriário e do pet");
     }
 }

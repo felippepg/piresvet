@@ -68,5 +68,22 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 
+    @ExceptionHandler(InvalidAppointmentsStructureException.class)
+    private ResponseEntity<RestErrorMessage>invalidAppointmentStructure(InvalidAppointmentsStructureException exception) {
+        var response = new RestErrorMessage(HttpStatus.BAD_REQUEST, exception.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    @ExceptionHandler(InvalidAppointmentsException.class)
+    private ResponseEntity<RestErrorMessage>invalidAppointment(InvalidAppointmentsException exception) {
+        var response = new RestErrorMessage(HttpStatus.UNPROCESSABLE_ENTITY, exception.getMessage());
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(response);
+    }
+
+    @ExceptionHandler(AppointmentNotFoundException.class)
+    private ResponseEntity<RestErrorMessage>appointmentNotFoundException(AppointmentNotFoundException exception) {
+        var response = new RestErrorMessage(HttpStatus.NOT_FOUND, exception.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
 
 }

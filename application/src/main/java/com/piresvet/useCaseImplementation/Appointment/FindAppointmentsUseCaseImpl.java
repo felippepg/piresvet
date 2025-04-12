@@ -1,6 +1,7 @@
 package com.piresvet.useCaseImplementation.Appointment;
 
 import com.piresvet.core.domain.Appointments;
+import com.piresvet.core.exception.AppointmentNotFoundException;
 import com.piresvet.gatewayContracts.Appointments.FindAppointmentsGateway;
 import com.piresvet.useCaseContracts.Appointment.FindAppointmentsUseCase;
 
@@ -24,7 +25,7 @@ public class FindAppointmentsUseCaseImpl implements FindAppointmentsUseCase {
     @Override
     public Appointments findById(UUID id) {
         var optional = findAppointmentsGateway.findById(id);
-        return optional.orElseThrow(() -> new NoSuchElementException("Não foi possivel localizar consulta"));
+        return optional.orElseThrow(() -> new AppointmentNotFoundException("Não foi possivel localizar consulta"));
     }
 
     @Override
@@ -32,7 +33,7 @@ public class FindAppointmentsUseCaseImpl implements FindAppointmentsUseCase {
         var appointments = findAppointmentsGateway.findByCpfOwner(cpf);
 
         if (appointments == null) {
-            throw new NoSuchElementException("Não foi possível localizar consulta com esse CPF do dono do Pet!");
+            throw new AppointmentNotFoundException("Não foi possível localizar consulta com esse CPF do tutor do Pet!");
         }
 
         return appointments;
