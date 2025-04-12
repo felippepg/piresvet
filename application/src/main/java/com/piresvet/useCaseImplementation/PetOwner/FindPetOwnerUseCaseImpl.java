@@ -23,7 +23,13 @@ public class FindPetOwnerUseCaseImpl implements FindPetOwnerUseCase {
 
     @Override
     public List<PetOwner> findByFullname(String firstname, String lastname) {
-        return findPetOwnerGateway.findByFullname(firstname, lastname);
+       var owners = findPetOwnerGateway.findByFullname(firstname, lastname);
+
+       if(owners.isEmpty()) {
+           throw new PetOwnerNotFoundException("Não foi possível localizar tutor");
+       }
+       return owners;
+
     }
 
     @Override
@@ -39,6 +45,11 @@ public class FindPetOwnerUseCaseImpl implements FindPetOwnerUseCase {
 
     @Override
     public List<PetOwner> findByName(String firstname) {
-        return findPetOwnerGateway.findByName(firstname);
+        var owners = findPetOwnerGateway.findByName(firstname);
+
+        if(owners.isEmpty()) {
+            throw new PetOwnerNotFoundException("Não foi possível localizar tutor");
+        }
+        return owners;
     }
 }

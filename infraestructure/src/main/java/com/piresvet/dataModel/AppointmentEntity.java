@@ -43,9 +43,6 @@ public class AppointmentEntity {
     @JoinColumn(name = "vet_id")
     private VetEntity vet;
 
-    @Column(name = "size", length = 45)
-    private String size;
-
     @Column(name = "is_finished")
     private Boolean isFinished;
 

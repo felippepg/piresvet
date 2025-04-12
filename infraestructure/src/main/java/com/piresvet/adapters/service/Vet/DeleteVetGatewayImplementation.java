@@ -1,4 +1,4 @@
-package com.piresvet.adapters.outbound.service.Vet;
+package com.piresvet.adapters.service.Vet;
 
 import com.piresvet.core.exception.VetNotFoundException;
 import com.piresvet.dataMapper.VetMapper;
@@ -15,8 +15,7 @@ public class DeleteVetGatewayImplementation implements DeleteVetGateway {
     private final VetRepository repository;
     @Override
     public void delete(UUID id) {
-        var vet = repository.findById(id).orElseThrow(
-                () -> new VetNotFoundException("Veterinário não encontrado"));
-        repository.delete(vet);
+        var vet = repository.findById(id);
+        repository.delete(vet.get());
     }
 }

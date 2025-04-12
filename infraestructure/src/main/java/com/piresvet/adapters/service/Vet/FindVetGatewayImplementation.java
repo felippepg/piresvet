@@ -23,9 +23,7 @@ public class FindVetGatewayImplementation implements FindVetGateway {
 
     @Override
     public Optional<Vet> findById(UUID id) {
-        var vet = repository.findById(id).orElseThrow(
-                () -> new VetNotFoundException("Veterinário não encontrado"));
-        return Optional.ofNullable(mapper.toDomain(vet));
+        return repository.findById(id).map(mapper::toDomain);
     }
 
     @Override
@@ -36,28 +34,22 @@ public class FindVetGatewayImplementation implements FindVetGateway {
 
     @Override
     public Optional<Vet> findByCrm(String crmv) {
-        var vet = repository.findByCrmv(crmv).orElseThrow(
-                () -> new VetNotFoundException("Veterinário não encontrado"));
-        return Optional.ofNullable(mapper.toDomain(vet));
+        return repository.findByCrmv(crmv).map(mapper::toDomain);
     }
 
     @Override
     public List<Vet> findAvailable() {
-        return repository.findByAvailableTrue().stream().map(mapper::toDomain)
-                .collect(Collectors.toList());
+        return repository.findByAvailableTrue().stream().map(mapper::toDomain).collect(Collectors.toList());
     }
 
     @Override
     public List<Vet> findAll() {
-        return repository.findAll().stream()
-                .map(vetEntity -> mapper.toDomain(vetEntity))
-                .collect(Collectors.toList());
+        return repository.findAll().stream().map(mapper::toDomain).collect(Collectors.toList());
     }
 
     @Override
     public List<Vet> findByName(String firstname) {
         var vet = repository.findByFirstnameIgnoreCase(firstname);
-        return vet.stream().map(mapper::toDomain)
-                .collect(Collectors.toList());
+        return vet.stream().map(mapper::toDomain).collect(Collectors.toList());
     }
 }

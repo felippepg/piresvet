@@ -2,6 +2,7 @@ package com.piresvet.adapters.inbound.controller;
 
 import com.piresvet.adapters.inbound.dtos.Appointment.AppointmentRequest;
 import com.piresvet.adapters.inbound.dtos.Appointment.AppointmentResponse;
+import com.piresvet.adapters.helpers.AppointmentHelper;
 import com.piresvet.dataMapper.AppointmentMapper;
 import com.piresvet.useCaseContracts.Appointment.*;
 import com.piresvet.useCaseContracts.Pet.FindPetsUseCase;
@@ -20,20 +21,17 @@ import java.util.stream.Collectors;
 public class AppointmentController {
 
     private final CreateAppointmentUseCase createAppointmentUseCase;
-
-    private final FindPetsUseCase findPetsUseCase;
-    private final FindVetUseCase findVetUseCase;
-    private final AppointmentMapper appointmentMapper;
     private final FindAppointmentsUseCase findAppointmentsUseCase;
     private final UpdateAppointmentsUseCase updateAppointmentsUseCase;
     private final DeleteAppointmentsUseCase deleteAppointmentsUseCase;
     private final FinishedAppointmentsUseCase finishedAppointmentsUseCase;
+    private final AppointmentMapper appointmentMapper;
+    private final AppointmentHelper appointmentHelper;
 
     @PostMapping("/create")
     public ResponseEntity<AppointmentResponse> createVet(@RequestBody AppointmentRequest request) {
-        var pet = findPetsUseCase.findPetById(request.pet());
-        var vet = findVetUseCase.findById(request.vet());
-        var appointment = appointmentMapper.toDomain(request, pet, vet);
+        appointmentHelper.validate(request);
+        var appointment = appointmentHelper.generate(request);
         var response = createAppointmentUseCase.create(appointment);
         return ResponseEntity.ok(appointmentMapper.toResponse(response));
     }
@@ -57,15 +55,11 @@ public class AppointmentController {
     }
 
     @PatchMapping("/update/{id}")
-    public ResponseEntity<AppointmentResponse> updateAppointment(
-            @PathVariable("id") UUID id, @RequestBody AppointmentRequest request) {
-        var pet = findPetsUseCase.findPetById(request.pet());
-        var vet = findVetUseCase.findById(request.vet());
-        var appointment = appointmentMapper.toDomain(request, pet, vet);
+    public ResponseEntity<AppointmentResponse> updateAppointment(@PathVariable("id") UUID id, @RequestBody AppointmentRequest request) {
+        appointmentHelper.validate(request);
+        var appointment = appointmentHelper.generate(request);
         var response = updateAppointmentsUseCase.update(id, appointment);
-
         return ResponseEntity.ok(appointmentMapper.toResponse(response));
-
     }
 
     @DeleteMapping("/cancel/{id}")

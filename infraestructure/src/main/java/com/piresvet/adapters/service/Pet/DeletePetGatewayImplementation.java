@@ -14,7 +14,7 @@ public class DeletePetGatewayImplementation implements DeletePetGateway {
 
     @Override
     public void delete(UUID id) {
-        var pet = petRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Pet Não encontrado"));
-        petRepository.delete(pet);
+        var pet = petRepository.findById(id);
+        petRepository.delete(pet.get());
     }
 }

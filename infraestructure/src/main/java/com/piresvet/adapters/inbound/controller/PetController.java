@@ -2,6 +2,7 @@ package com.piresvet.adapters.inbound.controller;
 
 import com.piresvet.adapters.inbound.dtos.Pet.PetRequest;
 import com.piresvet.adapters.inbound.dtos.Pet.PetResponse;
+import com.piresvet.core.exception.PetOwnerNotFoundException;
 import com.piresvet.dataMapper.PetMapper;
 import com.piresvet.useCaseContracts.Pet.CreatePetUseCase;
 import com.piresvet.useCaseContracts.Pet.DeletePetUseCase;
@@ -29,6 +30,9 @@ public class PetController {
 
     @PostMapping("/create")
     public ResponseEntity<PetResponse> create(@RequestBody PetRequest request, UriComponentsBuilder uriComponentsBuilder) {
+        if(request.owner() == null) {
+            throw new PetOwnerNotFoundException("Tutor não informado!");
+        }
         var owner = findPetOwnerUseCase.findById(request.owner());
         var pet = createPetUseCase.create(mapper.toDomain(request, owner));
         var uri = uriComponentsBuilder.path("/api/v1/pets/find{id}").buildAndExpand(pet.getId()).toUri();

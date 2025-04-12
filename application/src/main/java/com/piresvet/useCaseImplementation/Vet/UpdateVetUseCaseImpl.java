@@ -1,6 +1,7 @@
 package com.piresvet.useCaseImplementation.Vet;
 
 import com.piresvet.core.domain.Vet;
+import com.piresvet.core.exception.VetNotFoundException;
 import com.piresvet.gatewayContracts.Vet.FindVetGateway;
 import com.piresvet.gatewayContracts.Vet.UpdateVetUseGateway;
 import com.piresvet.useCaseContracts.Vet.UpdateVetUseCase;
@@ -18,7 +19,8 @@ public class UpdateVetUseCaseImpl implements UpdateVetUseCase {
 
     @Override
     public Vet update(UUID id, Vet vet) {
-        this.findVetGateway.findById(id);
+        this.findVetGateway.findById(id).orElseThrow(
+                () -> new VetNotFoundException("Veterinario não encontrado!"));
         return this.updateVetUseGateway.update(id,vet);
     }
 }

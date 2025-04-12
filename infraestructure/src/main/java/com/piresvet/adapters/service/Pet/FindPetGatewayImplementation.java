@@ -31,8 +31,7 @@ public class FindPetGatewayImplementation implements FindPetsGateway {
         var owner = petOwnerMapper.toDomain(ownerEntity.get());
         var petEntities = petRepository.findByPetOwnerCpf(cpf);
 
-        return petEntities.stream()
-                .map(petEntity -> petMapper.toDomain(petEntity, owner))
+        return petEntities.stream().map(petEntity -> petMapper.toDomain(petEntity, owner))
                 .collect(Collectors.toList());
     }
 

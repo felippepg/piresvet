@@ -1,6 +1,7 @@
 package com.piresvet.useCaseImplementation.Pet;
 
 import com.piresvet.core.domain.Pet;
+import com.piresvet.core.exception.PetNotFoundException;
 import com.piresvet.core.exception.PetOwnerNotFoundException;
 import com.piresvet.gatewayContracts.Pet.FindPetsGateway;
 import com.piresvet.gatewayContracts.PetOwner.FindPetOwnerGateway;
@@ -33,6 +34,6 @@ public class FindPetsUseCaseImpl implements FindPetsUseCase {
     @Override
     public Pet findPetById(UUID id) {
         var optional = findPetsGateway.findPetById(id);
-        return optional.orElseThrow(() -> new NoSuchElementException("Não foi possivel encontrar o Pet"));
+        return optional.orElseThrow(() -> new PetNotFoundException("Não foi possivel localizar o Pet"));
     }
 }

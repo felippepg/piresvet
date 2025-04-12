@@ -1,5 +1,6 @@
 package com.piresvet.useCaseImplementation.Appointment;
 
+import com.piresvet.core.exception.AppointmentNotFoundException;
 import com.piresvet.gatewayContracts.Appointments.DeleteAppointmentsGateway;
 import com.piresvet.gatewayContracts.Appointments.FindAppointmentsGateway;
 import com.piresvet.useCaseContracts.Appointment.DeleteAppointmentsUseCase;
@@ -17,7 +18,8 @@ public class DeleteAppointmentsUseCaseImpl implements DeleteAppointmentsUseCase 
 
     @Override
     public void delete(UUID id) {
-        findAppointmentsGateway.findById(id);
+        findAppointmentsGateway.findById(id).orElseThrow(
+                () -> new AppointmentNotFoundException("Não foi possivel localizar consulta!"));
         deleteAppointmentsGateway.delete(id);
     }
 }

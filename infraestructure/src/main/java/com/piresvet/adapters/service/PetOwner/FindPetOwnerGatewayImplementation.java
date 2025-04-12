@@ -20,8 +20,7 @@ public class FindPetOwnerGatewayImplementation implements FindPetOwnerGateway {
     private final PetOwnerMapper mapper;
     @Override
     public Optional<PetOwner> findById(UUID id) {
-        var petOwner = repository.findById(id).orElseThrow(() -> new PetOwnerNotFoundException("Tutor não encontrado"));
-        return Optional.ofNullable(mapper.toDomain(petOwner));
+        return repository.findById(id).map(mapper::toDomain);
     }
 
     @Override
@@ -33,8 +32,7 @@ public class FindPetOwnerGatewayImplementation implements FindPetOwnerGateway {
 
     @Override
     public Optional<PetOwner> findByCpf(String cpf) {
-        var petOwner = repository.findByCpf(cpf).orElseThrow(() -> new PetOwnerNotFoundException("Tutor não encontrado"));
-        return Optional.ofNullable(mapper.toDomain(petOwner));
+        return repository.findByCpf(cpf).map(mapper::toDomain);
     }
 
     @Override
