@@ -19,8 +19,7 @@ public class UpdateVetGatewayImplementation implements UpdateVetUseGateway {
 
     @Override
     public Vet update(UUID id, Vet vet) {
-        var actual = repository.findById(id).orElseThrow(
-                () -> new VetNotFoundException("Não foi possivel localizar veterinário"));
+        var actual = repository.findById(id).get();
 
         if(vet.getFirstname() != null) {
             actual.setFirstname(vet.getFirstname());

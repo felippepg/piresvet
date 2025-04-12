@@ -1,6 +1,7 @@
 package com.piresvet.useCaseImplementation.PetOwner;
 
 import com.piresvet.core.domain.PetOwner;
+import com.piresvet.core.exception.PetOwnerNotFoundException;
 import com.piresvet.gatewayContracts.PetOwner.FindPetOwnerGateway;
 import com.piresvet.gatewayContracts.PetOwner.UpdatePetOwnerGateway;
 import com.piresvet.useCaseContracts.PetOwner.UpdatePetOwnerUseCase;
@@ -18,7 +19,8 @@ public class UpdatePetOwnerUseCaseImpl implements UpdatePetOwnerUseCase {
 
     @Override
     public PetOwner update(UUID id, PetOwner petOwner) {
-        findPetOwnerGateway.findById(id);
+        findPetOwnerGateway.findById(id).orElseThrow(
+                () -> new PetOwnerNotFoundException("Tutor não encontrado!"));
         return updatePetOwnerGateway.update(id, petOwner);
     }
 }
