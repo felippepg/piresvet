@@ -1,5 +1,6 @@
 package com.piresvet.useCaseImplementation.Vet;
 
+import com.piresvet.core.exception.VetNotFoundException;
 import com.piresvet.gatewayContracts.Vet.DeleteVetGateway;
 import com.piresvet.gatewayContracts.Vet.FindVetGateway;
 import com.piresvet.useCaseContracts.Vet.DeleteVetUseCase;
@@ -17,7 +18,8 @@ public class DeleteVetUseCaseImpl implements DeleteVetUseCase {
 
     @Override
     public void delete(UUID id) {
-        this.findVetGateway.findById(id);
+        this.findVetGateway.findById(id)
+                .orElseThrow(() -> new VetNotFoundException("Não foi possivel localizar o veterinário"));
         this.deleteVetGateway.delete(id);
     }
 }
