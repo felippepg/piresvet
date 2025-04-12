@@ -56,5 +56,17 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
     }
 
+    @ExceptionHandler(InvalidPetException.class)
+    private ResponseEntity<RestErrorMessage>invalidPetException(InvalidPetException exception) {
+        var response = new RestErrorMessage(HttpStatus.BAD_REQUEST, exception.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    @ExceptionHandler(PetNotFoundException.class)
+    private ResponseEntity<RestErrorMessage>petNotFoundException(PetNotFoundException exception) {
+        var response = new RestErrorMessage(HttpStatus.NOT_FOUND, exception.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
 
 }
