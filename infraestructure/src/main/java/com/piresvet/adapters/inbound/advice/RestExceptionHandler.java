@@ -1,14 +1,20 @@
 package com.piresvet.adapters.inbound.advice;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.piresvet.adapters.inbound.dtos.RestErrorMessage;
 import com.piresvet.core.exception.*;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.lang.Nullable;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
 
 
 @ControllerAdvice
@@ -85,5 +91,25 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         var response = new RestErrorMessage(HttpStatus.NOT_FOUND, exception.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
+
+    @Override
+    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+        if (ex.getCause() instanceof InvalidFormatException) {
+            InvalidFormatException cause = (InvalidFormatException) ex.getCause();
+
+            String invalidValue = cause.getValue().toString();
+            String enumName = cause.getTargetType().getSimpleName();
+
+            String message = String.format(ex.getMessage(),
+                    invalidValue, enumName);
+
+            var response = new RestErrorMessage(HttpStatus.BAD_REQUEST, message);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+
+        var genericResponse = new RestErrorMessage(HttpStatus.BAD_REQUEST, "Failed to read request.");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(genericResponse);
+    }
+
 
 }
