@@ -1,5 +1,7 @@
 package com.piresvet.adapters.inbound.controller;
 
+import com.piresvet.adapters.helpers.PetOwnerHelper;
+import com.piresvet.adapters.inbound.dtos.PetOwner.PetOwnerPatchRequest;
 import com.piresvet.adapters.inbound.dtos.PetOwner.PetOwnerRequest;
 import com.piresvet.adapters.inbound.dtos.PetOwner.PetOwnerResponse;
 import com.piresvet.dataMapper.PetOwnerMapper;
@@ -25,6 +27,7 @@ public class PetOwnerController {
     private final DeletePetOwnerUseCase deletePetOwnerUseCase;
     private final UpdatePetOwnerUseCase updatePetOwnerUseCase;
     private final PetOwnerMapper mapper;
+    private final PetOwnerHelper petOwnerHelper;
 
 
     @PostMapping("/create")
@@ -70,9 +73,9 @@ public class PetOwnerController {
     }
 
     @PatchMapping("/update/{id}")
-    public ResponseEntity<PetOwnerResponse> updatePetOwner(@PathVariable("id") UUID id, @RequestBody PetOwnerRequest request) {
-        var newPetOwner = updatePetOwnerUseCase.update(id, mapper.toDomain(request));
-
+    public ResponseEntity<PetOwnerResponse> updatePetOwner(@PathVariable("id") UUID id, @RequestBody PetOwnerPatchRequest request) {
+        var petOwnerDomain = petOwnerHelper.generate(request, id);
+        var newPetOwner = updatePetOwnerUseCase.update(id, petOwnerDomain);
         return ResponseEntity.ok().body(mapper.toResponse(newPetOwner));
     }
 

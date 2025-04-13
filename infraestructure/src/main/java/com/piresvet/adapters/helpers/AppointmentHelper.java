@@ -28,6 +28,8 @@ public class AppointmentHelper {
         if(appointmentRequest.services() == null) {
             throw new InvalidAppointmentsStructureException("Não é possivel criar uma consulta sem um serviço!");
         }
+
+
     }
 
     public Appointments generate(AppointmentRequest request) {
