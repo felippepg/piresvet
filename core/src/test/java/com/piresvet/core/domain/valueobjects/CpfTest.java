@@ -19,7 +19,7 @@ class CpfTest {
     @Test
     @DisplayName("Should not create Cpf with invalid params")
     public void shouldNotCreateCpfWithInvalidParams() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Cpf("123"));
+        Exception exception = assertThrows(InvalidCpfException.class, () -> new Cpf("123"));
 
         assertEquals("Formato do CPF inválido", exception.getMessage());
     }

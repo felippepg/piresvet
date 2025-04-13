@@ -1,7 +1,10 @@
 package com.piresvet.core.domain.valueobjects;
 
+import com.piresvet.core.exception.InvalidUsernameException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import javax.naming.InvalidNameException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,14 +20,14 @@ class NameTest {
     @Test
     @DisplayName("Should not create a name with unless 3 charactes")
     public void shouldNotCreateNameWithInvalidParams() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Name("Ba"));
+        Exception exception = assertThrows(InvalidUsernameException.class, () -> new Name("Ba"));
         assertEquals("Campo precisa no mínimo de 3 caracteres", exception.getMessage());
     }
 
     @Test
     @DisplayName("Should not create a name with null params")
     public void shouldNotCreateNameWithNullParams() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Name(null));
+        Exception exception = assertThrows(InvalidUsernameException.class, () -> new Name(null));
         assertEquals("Nome não pode ser vazio ou nulo", exception.getMessage());
     }
 
