@@ -1,5 +1,6 @@
 package com.piresvet.dataMapper;
 
+import com.piresvet.adapters.inbound.dtos.Vet.VetPatchRequest;
 import com.piresvet.adapters.inbound.dtos.Vet.VetRequest;
 import com.piresvet.adapters.inbound.dtos.Vet.VetResponse;
 import com.piresvet.core.domain.Vet;
@@ -41,5 +42,10 @@ public class VetMapper {
                 .crmv(vet.getCrmv())
                 .available(true)
                 .build();
+    }
+
+    public Vet toDomain(VetPatchRequest request) {
+        return factory.create(request.firstname(), request.lastname(), null);
+
     }
 }

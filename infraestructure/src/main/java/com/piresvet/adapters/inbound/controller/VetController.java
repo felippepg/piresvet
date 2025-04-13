@@ -1,8 +1,9 @@
 package com.piresvet.adapters.inbound.controller;
 
+import com.piresvet.adapters.helpers.VetHelper;
+import com.piresvet.adapters.inbound.dtos.Vet.VetPatchRequest;
 import com.piresvet.adapters.inbound.dtos.Vet.VetRequest;
 import com.piresvet.adapters.inbound.dtos.Vet.VetResponse;
-import com.piresvet.core.domain.Vet;
 import com.piresvet.dataMapper.VetMapper;
 import com.piresvet.useCaseContracts.Vet.CreateVetUseCase;
 import com.piresvet.useCaseContracts.Vet.DeleteVetUseCase;
@@ -26,6 +27,7 @@ public class VetController {
     private final UpdateVetUseCase updateVetUseCase;
     private final FindVetUseCase findVetUseCase;
     private final VetMapper mapper;
+    private final VetHelper vetHelper;
 
     @PostMapping("/create")
     public ResponseEntity<VetResponse> createVet(@RequestBody VetRequest request) {
@@ -82,8 +84,9 @@ public class VetController {
     }
 
     @PatchMapping("/update/{id}")
-    public ResponseEntity<VetResponse> updateVet(@PathVariable("id") UUID id, @RequestBody VetRequest request) {
-        var newVet = updateVetUseCase.update(id, mapper.toDomain(request));
+    public ResponseEntity<VetResponse> updateVet(@PathVariable("id") UUID id, @RequestBody VetPatchRequest request) {
+        var vetDomain = vetHelper.generate(request, id);
+        var newVet = updateVetUseCase.update(id, vetDomain);
         return ResponseEntity.ok().body(mapper.toResponse(newVet));
     }
 
