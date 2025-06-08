@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/piresvet_db
+      SPRING_DATASOURCE_USERNAME: piresvet_user
+      SPRING_DATASOURCE_PASSWORD: masterpass
+    depends_on:
+      - database
+  database:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: piresvet_db
+      POSTGRES_USER: piresvet_user
+      POSTGRES_PASSWORD: masterpass
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:
